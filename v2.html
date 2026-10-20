@@ -8,7 +8,7 @@
 <title>Terapeasy Home v2</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;600;700&family=Nunito:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700&family=Figtree:wght@400;500;600;700&display=swap">
 <style>
 /* Layout: ritmo calmo tipo editorial (Oura), hero directo con videollamada (Preply), búsqueda por necesidad con caras (Alma). Serif para la voz, Figtree para la interfaz. */
 :root{
@@ -18,8 +18,8 @@
   --coral:#FF6B3B; --coral-soft:#FFE7DE; --coral-ink:#B23F18;
   --on-deep:#FFF5FA; --on-deep-muted:#DEC6D6;
   --shadow:0 1px 2px rgba(60,25,50,.05),0 18px 40px -18px rgba(60,25,50,.22);
-  --serif:"Quicksand",ui-rounded,"SF Pro Rounded",system-ui,sans-serif;
-  --body:"Nunito",ui-rounded,system-ui,-apple-system,"Segoe UI",sans-serif;
+  --serif:"Outfit",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+  --body:"Figtree",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
   --max:1200px;
 }
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
@@ -42,7 +42,7 @@ body{background:var(--bg);color:var(--ink);font:400 16px/1.6 var(--body);-webkit
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--bg)}
 a{color:inherit}
 h1,h2,h3{margin:0;text-wrap:balance}
-h1,h2{font-family:var(--serif);font-weight:700;letter-spacing:-.02em;line-height:1.08}
+h1,h2{font-family:var(--serif);font-weight:600;letter-spacing:-.025em;line-height:1.06}
 h1 em,h2 em{font-style:normal;color:var(--plum)}
 h3{font-weight:600;font-size:1.1rem;line-height:1.3}
 p{margin:0}
@@ -97,7 +97,7 @@ header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;backgroun
 .call .bar span.end{background:#E5484D}
 .call .bar svg{width:18px;height:18px}
 .call .tag{position:absolute;left:-28px;bottom:76px;background:var(--surface);border-radius:16px;padding:12px 16px;box-shadow:var(--shadow);display:grid;gap:2px;font-size:.85rem;color:var(--muted)}
-.call .tag b{font:700 1.25rem/1.2 var(--serif);color:var(--ink)}
+.call .tag b{font:600 1.25rem/1.2 var(--serif);color:var(--ink)}
 
 /* Hero con foto de fondo (muro recoloreado a ciruela); look fijo en ambos temas */
 .hero-c{position:relative;overflow:hidden;background:#4F3B4B;color:#FFFFFF;padding-block:0}
@@ -135,7 +135,7 @@ header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;backgroun
 .facts .wrap{display:grid;grid-template-columns:repeat(4,1fr)}
 .fact{padding:32px 28px;display:grid;gap:6px;border-left:1px solid var(--line)}
 .fact:first-child{border-left:0;padding-left:0}
-.fact b{font:700 2.6rem/1 var(--serif);letter-spacing:-.02em;color:var(--plum)}
+.fact b{font:600 2.6rem/1 var(--serif);letter-spacing:-.02em;color:var(--plum)}
 .fact span{color:var(--muted);font-size:.95rem;max-width:22ch}
 
 /* Necesidades (Alma) */
@@ -152,7 +152,7 @@ header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;backgroun
 .faces{display:flex}
 .faces img{width:64px;height:64px;border-radius:50%;object-fit:cover;border:3px solid var(--surface);margin-left:-14px;max-width:none}
 .faces img:first-child{margin-left:0}
-.need h3{font:700 1.7rem/1.1 var(--serif);letter-spacing:-.01em}
+.need h3{font:600 1.7rem/1.1 var(--serif);letter-spacing:-.01em}
 .need p{color:var(--muted);font-size:.95rem}
 .need .via{display:flex;flex-wrap:wrap;gap:6px}
 .need .via span{font-size:.78rem;font-weight:600;padding:.3em .7em;border-radius:999px;background:var(--sand);color:var(--plum-strong)}
@@ -165,7 +165,7 @@ header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;backgroun
 .calm p{margin-top:24px;font-size:1.15rem;color:var(--muted);max-width:32em}
 .calm .img{border-radius:28px;overflow:hidden;aspect-ratio:6/5;max-width:100%}
 .calm .img img{width:100%;height:100%;object-fit:cover;object-position:52% 50%;display:block}
-.spectrum{margin-top:36px;display:flex;flex-wrap:wrap;gap:8px 18px;font:600 1.15rem var(--serif);color:var(--ink)}
+.spectrum{margin-top:36px;display:flex;flex-wrap:wrap;gap:8px 18px;font:500 1.15rem var(--serif);color:var(--ink)}
 .spectrum span::after{content:"·";margin-left:18px;color:var(--plum)}
 .spectrum span:last-child::after{content:""}
 
@@ -177,7 +177,7 @@ header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;backgroun
 .how article:nth-child(1) .step{color:var(--plum)}
 .how article:nth-child(2) .step{color:var(--sage-ink)}
 .how article:nth-child(3) .step{color:var(--coral-ink)}
-.how h3{font:700 1.6rem/1.15 var(--serif)}
+.how h3{font:600 1.6rem/1.15 var(--serif)}
 .how p{color:var(--muted)}
 .ui .row{display:flex;gap:10px;align-items:center;background:var(--surface);border-radius:14px;padding:10px 12px;box-shadow:0 1px 2px rgba(0,0,0,.05)}
 .ui .row img{width:38px;height:38px;border-radius:50%;object-fit:cover}
@@ -210,7 +210,7 @@ header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;backgroun
 .trial .btn:hover{background:#B9E4BD}
 .promise{display:grid;gap:0;border-top:1px solid rgba(255,255,255,.18)}
 .promise div{display:grid;grid-template-columns:auto 1fr;gap:6px 18px;padding:22px 0;border-bottom:1px solid rgba(255,255,255,.18)}
-.promise b{grid-row:span 2;font:700 2.2rem/1 var(--serif);color:#F2C3E3;min-width:3.2ch;font-variant-numeric:tabular-nums}
+.promise b{grid-row:span 2;font:600 2.2rem/1 var(--serif);color:#F2C3E3;min-width:3.2ch;font-variant-numeric:tabular-nums}
 .promise strong{font-weight:600}
 .promise span{color:var(--on-deep-muted);font-size:.95rem}
 
@@ -241,7 +241,7 @@ header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;backgroun
 /* FAQ */
 .faq .wrap{display:grid;grid-template-columns:.8fr 1.2fr;gap:72px}
 .faq details{border-bottom:1px solid var(--line)}
-.faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;gap:16px;padding:22px 0;font:600 1.3rem/1.35 var(--serif)}
+.faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;gap:16px;padding:22px 0;font:500 1.3rem/1.35 var(--serif)}
 .faq summary::-webkit-details-marker{display:none}
 .faq summary::after{content:"+";font:300 1.8rem/1 var(--body);color:var(--plum);transition:transform .2s}
 .faq details[open] summary::after{transform:rotate(45deg)}
