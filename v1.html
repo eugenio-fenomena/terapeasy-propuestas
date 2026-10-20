@@ -8,7 +8,7 @@
 <title>Terapeasy Home</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700&family=Figtree:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Quicksand:wght@500;600;700&family=Nunito:wght@400;500;600;700&display=swap">
 <style>
 /* Layout: aire claro con tinte ciruela; el motivo de los dos arcos del logo se repite como gráfico; una sola banda oscura (terapeutas). */
 :root{
@@ -18,8 +18,8 @@
   --coral:#FF6B3B; --coral-soft:#FFE6DC; --coral-ink:#B5401A;
   --band:#5A2C4F; --on-band:#FFF6FB; --on-band-muted:#E2C9DA;
   --shadow:0 1px 2px rgba(60,20,50,.06),0 12px 32px -12px rgba(60,20,50,.18);
-  --display:"Bricolage Grotesque",ui-sans-serif,system-ui,sans-serif;
-  --body:"Figtree",ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;
+  --display:"Quicksand",ui-rounded,"SF Pro Rounded",system-ui,sans-serif;
+  --body:"Nunito",ui-rounded,system-ui,-apple-system,"Segoe UI",sans-serif;
   --r:14px; --max:1180px;
 }
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
@@ -41,7 +41,7 @@
 body{background:var(--bg);color:var(--ink);font:400 16px/1.6 var(--body);-webkit-font-smoothing:antialiased}
 body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:30;background:var(--bg)}
 a{color:inherit}
-h1,h2,h3{font-family:var(--display);font-weight:600;line-height:1.08;letter-spacing:-.02em;text-wrap:balance;margin:0}
+h1,h2,h3{font-family:var(--display);font-weight:700;line-height:1.1;letter-spacing:-.015em;text-wrap:balance;margin:0}
 p{margin:0}
 .wrap{max-width:var(--max);margin:0 auto;padding-left:max(20px,env(safe-area-inset-left,0px));padding-right:max(20px,env(safe-area-inset-right,0px))}
 .eyebrow{font-size:.78rem;font-weight:600;letter-spacing:.09em;text-transform:uppercase;color:var(--plum)}
