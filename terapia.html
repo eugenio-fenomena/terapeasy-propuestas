@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Reiki · Terapeasy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;500;600;700&family=Lato:ital,wght@0,400;0,700;0,900;1,400&display=swap">
+<link rel="stylesheet" href="base.css">
+</head>
+<body>
+<style>
+/* Página de terapia: presentación + listado con filtros + columna de ayuda */
+.t-hero{background:var(--tint)}
+.t-hero .grid{display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:center;padding-block:28px 64px}
+.t-hero h1{font-size:clamp(2.6rem,5.4vw,4.2rem);margin-top:10px}
+.t-hero .lede{margin-top:18px;font-size:1.12rem;color:var(--muted);max-width:36em}
+.t-hero .tags{margin-top:22px;display:flex;flex-wrap:wrap;gap:8px}
+.t-hero .tag{background:var(--surface)}
+.t-pic{position:relative;border-radius:24px;overflow:hidden;aspect-ratio:4/3;max-width:100%}
+.t-pic img{width:100%;height:100%;object-fit:cover}
+.t-facts{position:absolute;left:16px;right:16px;bottom:16px;background:var(--surface);border-radius:16px;padding:14px 18px;display:grid;grid-template-columns:repeat(3,1fr);gap:12px;box-shadow:var(--shadow)}
+.t-facts div{display:grid;gap:2px;min-width:0}
+.t-facts small{font-size:.75rem;color:var(--muted);font-weight:700;letter-spacing:.04em;text-transform:uppercase}
+.t-facts b{font:600 1.05rem/1.2 var(--display)}
+
+.filters{position:sticky;top:calc(68px + env(safe-area-inset-top,0px));z-index:10;background:color-mix(in srgb,var(--bg) 94%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+.filters .wrap{display:flex;flex-wrap:wrap;gap:10px;align-items:center;padding-block:14px}
+.filters .select,.filters .input{width:auto;padding:.6em 2.4em .6em 1em;font-size:.93rem;border-radius:999px}
+.filters .input{padding-right:1em;min-width:0;flex:1 1 200px;max-width:280px}
+.toggle{display:inline-flex;align-items:center;gap:8px;font-size:.93rem;font-weight:700;border:1.5px solid var(--line);border-radius:999px;padding:.5em 1em;background:var(--surface);cursor:pointer}
+.toggle input{accent-color:var(--plum);width:16px;height:16px;margin:0}
+.filters .count{margin-left:auto;font-size:.9rem;color:var(--muted)}
+
+.listing{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:40px;align-items:start;padding-block:36px 96px}
+.cards{display:grid;gap:16px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:22px;display:grid;grid-template-columns:96px minmax(0,1fr) 230px;gap:22px;transition:border-color .2s,box-shadow .2s}
+.card:hover{border-color:color-mix(in srgb,var(--plum) 45%,var(--line));box-shadow:var(--shadow)}
+.card .ph{width:96px;height:96px;border-radius:50%;object-fit:cover}
+.card .info{display:grid;gap:8px;align-content:start;min-width:0}
+.card h3{font-size:1.3rem;display:flex;align-items:center;gap:6px}
+.card h3 a{text-decoration:none}
+.card h3 a:hover{color:var(--plum)}
+.card .role{font-size:.92rem;color:var(--muted)}
+.card .bio{font-size:.95rem;color:var(--muted);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.card .tags{display:flex;flex-wrap:wrap;gap:6px}
+.card .side{display:grid;gap:10px;align-content:start;border-left:1px solid var(--line);padding-left:22px}
+.price{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.price b{font:600 1.35rem var(--display);font-variant-numeric:tabular-nums}
+.price small{color:var(--muted);font-size:.82rem}
+.trialp{font-size:.82rem;font-weight:700;color:var(--coral-ink);background:var(--coral-soft);border-radius:8px;padding:5px 9px}
+.next small{display:block;font-size:.78rem;color:var(--muted);margin-bottom:6px}
+.next div{display:flex;gap:6px;flex-wrap:wrap}
+.next a{font-size:.8rem;font-weight:700;font-variant-numeric:tabular-nums;padding:6px 9px;border-radius:8px;border:1px solid var(--line);text-decoration:none}
+.next a:hover{border-color:var(--sage-ink);background:var(--sage-soft);color:var(--sage-ink)}
+.card .side .btn{padding:.75em 1em;font-size:.9rem}
+
+aside.help{position:sticky;top:calc(150px + env(safe-area-inset-top,0px));display:grid;gap:16px}
+.box{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:22px;display:grid;gap:12px}
+.box h3{font-size:1.15rem}
+.box p,.box li{font-size:.93rem;color:var(--muted)}
+.box ul{margin:0;padding-left:1.1em;display:grid;gap:6px}
+.box.trial{background:var(--coral-soft);border-color:transparent}
+.box.trial h3,.box.trial p{color:var(--coral-ink)}
+.more{display:flex;justify-content:center;margin-top:8px}
+
+.about{display:grid;grid-template-columns:.8fr 1.2fr;gap:64px;padding-block:88px;border-top:1px solid var(--line)}
+.about h2{font-size:clamp(1.9rem,3.4vw,2.6rem)}
+.related{padding-block:0 96px}
+.related .row{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+
+@media (max-width:1080px){
+  .card{grid-template-columns:80px minmax(0,1fr)}
+  .card .ph{width:80px;height:80px}
+  .card .side{grid-column:1/-1;border-left:0;padding-left:0;border-top:1px solid var(--line);padding-top:14px;grid-template-columns:1fr 1fr;align-items:end}
+  .card .side .next{grid-column:1/-1}
+}
+@media (max-width:980px){
+  .t-hero .grid,.listing,.about{grid-template-columns:1fr}
+  aside.help{position:static;order:-1}
+  aside.help .box:not(.trial){display:none}
+  .filters .count{width:100%;margin-left:0}
+}
+@media (max-width:640px){
+  .t-facts{grid-template-columns:1fr 1fr 1fr;padding:12px}
+  .t-facts b{font-size:.95rem}
+  .card{grid-template-columns:64px minmax(0,1fr);padding:18px;gap:16px}
+  .card .ph{width:64px;height:64px}
+  .card .side{grid-template-columns:1fr}
+  .filters .select,.filters .input{flex:1 1 45%;max-width:none}
+  .filters{position:static}
+}
+</style>
+
+<header class="top">
+  <div class="wrap">
+    <a href="v1.html" aria-label="Terapeasy, inicio"><span class="logo"></span></a>
+    <nav aria-label="Principal">
+      <a href="v1.html#terapias" aria-current="page">Terapias</a>
+      <a href="v1.html#como-funciona">Cómo funciona</a>
+      <a href="v1.html#terapeutas">Para terapeutas</a>
+      <a href="v1.html#preguntas">Preguntas</a>
+    </nav>
+    <div class="actions">
+      <a class="login" href="ingresar.html">Iniciar sesión</a>
+      <a class="btn btn-primary" href="registro.html">Crear cuenta</a>
+    </div>
+  </div>
+</header>
+
+<main>
+<section class="t-hero">
+  <div class="wrap">
+    <nav class="crumbs" aria-label="Ruta"><a href="v1.html">Inicio</a><span aria-hidden="true">/</span><a href="v1.html#terapias">Terapias</a><span aria-hidden="true">/</span><a href="v1.html#terapias">Energéticas y holísticas</a><span aria-hidden="true">/</span><span>Reiki</span></nav>
+    <div class="grid">
+      <div>
+        <p class="eyebrow">Energéticas y holísticas</p>
+        <h1>Reiki</h1>
+        <p class="lede">Terapia holística que trabaja con la energía para armonizar cuerpo, mente y emociones. Se usa para bajar el estrés, descansar mejor y acompañar procesos de cambio o de dolor.</p>
+        <div class="tags"><span class="tag">Estrés</span><span class="tag">Relajación</span><span class="tag">Sanación energética</span><span class="tag">Descanso</span></div>
+      </div>
+      <div class="t-pic">
+        <img src="img/reiki.jpg" alt="Manos abiertas en una sesión de Reiki">
+        <div class="t-facts">
+          <div><small>Modalidad</small><b>Videollamada</b></div>
+          <div><small>Sesión</small><b>60 min</b></div>
+          <div><small>Prueba</small><b>30 min</b></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="filters">
+  <div class="wrap">
+    <label class="sr" for="f-esp">Especialidad</label>
+    <select class="select" id="f-esp"><option>Reiki</option><option>Terapia Floral</option><option>Sintergética</option><option>Meditación Terapéutica</option><option>Todas las terapias</option></select>
+    <label class="sr" for="f-orden">Ordenar</label>
+    <select class="select" id="f-orden"><option>Recomendados</option><option>Precio: menor a mayor</option><option>Precio: mayor a menor</option><option>Más experiencia</option></select>
+    <label class="toggle" for="f-semana"><input type="checkbox" id="f-semana" checked> Con horas esta semana</label>
+    <label class="sr" for="f-nombre">Buscar por nombre</label>
+    <input class="input" id="f-nombre" type="search" placeholder="Buscar por nombre">
+    <span class="count" id="count">5 terapeutas de Reiki</span>
+  </div>
+</div>
+
+<div class="wrap listing">
+  <div>
+    <div class="cards" id="cards"></div>
+    <div class="more"><button class="btn btn-ghost" type="button">Ver más terapeutas</button></div>
+  </div>
+  <aside class="help" aria-label="Ayuda para elegir">
+    <div class="box trial">
+      <h3>Parte con una sesión de prueba</h3>
+      <p>La primera sesión con cada terapeuta dura 30 minutos y cuesta menos. Sirve para conocerse y ver si hay sintonía.</p>
+    </div>
+    <div class="box">
+      <h3>¿Cómo elegir?</h3>
+      <ul>
+        <li>Mira su video de presentación: te da una idea de cómo trabaja.</li>
+        <li>Revisa su formación y años de experiencia.</li>
+        <li>Si tienes dudas, escríbele antes de agendar.</li>
+      </ul>
+    </div>
+  </aside>
+</div>
+
+<section class="wrap about faq">
+  <div>
+    <p class="eyebrow">Sobre el Reiki</p>
+    <h2 style="margin-top:12px">Lo que conviene saber antes de agendar</h2>
+  </div>
+  <div>
+    <details open><summary>¿Cómo es una sesión de Reiki online?</summary><p>Te conectas por videollamada desde un lugar tranquilo. El terapeuta conversa contigo sobre lo que buscas y luego guía la sesión mientras tú te relajas. No necesitas preparar nada especial.</p></details>
+    <details><summary>¿Cuántas sesiones necesito?</summary><p>Depende de cada persona y de lo que quieras trabajar. En la sesión de prueba el terapeuta te puede orientar sobre un plan posible.</p></details>
+    <details><summary>¿Reemplaza un tratamiento médico?</summary><p>No. El Reiki es una terapia complementaria: acompaña tu bienestar, pero no reemplaza el diagnóstico ni el tratamiento de un profesional de la salud.</p></details>
+  </div>
+</section>
+
+<section class="wrap related">
+  <h2 style="font-size:1.5rem">También te puede interesar</h2>
+  <div class="row"><a class="chip" href="#">Terapia Floral</a><a class="chip" href="#">Sintergética</a><a class="chip" href="#">Meditación Terapéutica</a><a class="chip" href="#">Terapia con Imanes</a><a class="chip" href="#">Otras técnicas energéticas</a></div>
+</section>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <div class="fgrid">
+      <div class="about"><span class="logo"></span><p>Terapeutas de distintas especialidades, con agenda online y sesiones por videollamada.</p></div>
+      <div><h4>Pacientes</h4><ul><li><a href="v1.html#terapias">Terapias</a></li><li><a href="terapia.html">Buscar terapeuta</a></li><li><a href="v1.html#como-funciona">Cómo funciona</a></li><li><a href="v1.html#preguntas">Preguntas</a></li></ul></div>
+      <div><h4>Terapeutas</h4><ul><li><a href="registro.html">Crear perfil</a></li><li><a href="ingresar.html">Iniciar sesión</a></li></ul></div>
+      <div><h4>Síguenos</h4><ul><li><a href="#">Instagram</a></li><li><a href="#">Facebook</a></li><li><a href="#">YouTube</a></li></ul></div>
+    </div>
+    <div class="legal"><span>© 2026 Terapeasy SpA</span><span><a href="#">Términos y condiciones</a> · <a href="#">Privacidad</a></span></div>
+  </div>
+</footer>
+
+<script>
+const T=[
+ {n:"Camila Rojas",s:"camila",r:"Terapeuta floral y Reiki · 8 años",bio:"Acompaño procesos de ansiedad y cambio combinando Reiki y esencias florales, con sesiones tranquilas y a tu ritmo.",tags:["Reiki","Terapia Floral","Ansiedad"],p:38000,t:15000,next:["Hoy 17:30","Mañana 10:00","Jue 11:30"]},
+ {n:"Carmen Soto",s:"carmen",r:"Maestra de Reiki Usui · 15 años",bio:"Trabajo con personas que viven estrés prolongado o duelos. Mis sesiones combinan conversación, respiración y Reiki.",tags:["Reiki","Duelo","Estrés"],p:42000,t:18000,next:["Mañana 09:00","Mañana 18:00","Vie 16:00"]},
+ {n:"Rodrigo Fuentes",s:"rodrigo",r:"Terapeuta energético · 6 años",bio:"Reiki y Sintergética para recuperar energía y descanso. Atiendo también en horario vespertino.",tags:["Reiki","Sintergética"],p:35000,t:14000,next:["Hoy 20:00","Jue 19:30","Vie 20:00"]},
+ {n:"Andrea Muñoz",s:"andrea",r:"Reiki y meditación · 4 años",bio:"Sesiones para aprender a soltar tensiones del día a día, con ejercicios simples para practicar en casa.",tags:["Reiki","Meditación"],p:32000,t:12000,next:["Jue 10:30","Vie 12:00","Lun 09:30"]},
+ {n:"Josefina Araya",s:"josefina",r:"Consteladora y reikista · 12 años",bio:"Integro Reiki con constelaciones familiares para mirar patrones que se repiten y aliviar su carga.",tags:["Reiki","Constelaciones"],p:45000,t:18000,next:["Vie 17:00","Lun 18:30","Mar 11:00"]}
+];
+const clp=v=>"$"+v.toLocaleString("es-CL");
+const ver='<svg class="verified" viewBox="0 0 24 24" fill="currentColor" role="img" aria-label="Perfil verificado"><path d="M12 2l2.4 1.8 3-.2.9 2.9 2.5 1.7-1 2.8 1 2.8-2.5 1.7-.9 2.9-3-.2L12 22l-2.4-1.8-3 .2-.9-2.9-2.5-1.7 1-2.8-1-2.8 2.5-1.7.9-2.9 3 .2z"/><path d="M8.5 12.2l2.3 2.3 4.7-4.8" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+const cards=document.getElementById("cards");
+function draw(list){
+  cards.innerHTML=list.map(t=>`<article class="card">
+    <img class="ph" src="img/t-${t.s}.jpg" alt="">
+    <div class="info">
+      <h3><a href="terapeuta.html">${t.n}</a>${ver}</h3>
+      <p class="role">${t.r}</p>
+      <p class="bio">${t.bio}</p>
+      <div class="tags">${t.tags.map(x=>`<span class="tag">${x}</span>`).join("")}</div>
+    </div>
+    <div class="side">
+      <div class="price"><b>${clp(t.p)}</b><small>60 min</small></div>
+      <span class="trialp">Prueba de 30 min: ${clp(t.t)}</span>
+      <div class="next"><small>Próximas horas</small><div>${t.next.map(h=>`<a href="terapeuta.html#agenda">${h}</a>`).join("")}</div></div>
+      <a class="btn btn-primary" href="terapeuta.html">Ver perfil y agendar</a>
+    </div>
+  </article>`).join("");
+  document.getElementById("count").textContent=list.length+(list.length===1?" terapeuta":" terapeutas")+" de Reiki";
+}
+draw(T);
+const sortSel=document.getElementById("f-orden"), q=document.getElementById("f-nombre");
+function apply(){
+  let l=T.filter(t=>t.n.toLowerCase().includes(q.value.trim().toLowerCase()));
+  if(sortSel.selectedIndex===1) l=[...l].sort((a,b)=>a.p-b.p);
+  if(sortSel.selectedIndex===2) l=[...l].sort((a,b)=>b.p-a.p);
+  draw(l);
+}
+sortSel.addEventListener("change",apply); q.addEventListener("input",apply);
+</script>
+
+<p class="proto">Prototipo · perfiles y precios de ejemplo</p>
+</body>
+</html>

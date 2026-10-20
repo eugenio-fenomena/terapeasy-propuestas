@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Camila Rojas · Terapeasy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;500;600;700&family=Lato:ital,wght@0,400;0,700;0,900;1,400&display=swap">
+<link rel="stylesheet" href="base.css">
+</head>
+<body>
+<style>
+/* Perfil del terapeuta: contenido a la izquierda, agenda fija a la derecha (barra inferior en celular) */
+.p-wrap{display:grid;grid-template-columns:minmax(0,1fr) 380px;gap:48px;align-items:start;padding-block:24px 96px}
+.p-head{display:grid;grid-template-columns:168px minmax(0,1fr);gap:28px;align-items:center}
+.p-head img{width:168px;height:168px;border-radius:28px;object-fit:cover}
+.p-head h1{font-size:clamp(2.2rem,4.4vw,3.2rem);display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.p-head h1 .verified{width:26px;height:26px}
+.p-head .role{margin-top:8px;font-size:1.08rem;color:var(--muted)}
+.p-head .tags{margin-top:14px;display:flex;flex-wrap:wrap;gap:6px}
+.p-facts{margin-top:32px;display:grid;grid-template-columns:repeat(3,1fr);border:1px solid var(--line);border-radius:18px;background:var(--surface)}
+.p-facts div{padding:16px 18px;display:grid;gap:2px;border-left:1px solid var(--line);min-width:0}
+.p-facts div:first-child{border-left:0}
+.p-facts small{font-size:.75rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--muted)}
+.p-facts b{font:600 1.1rem/1.25 var(--display)}
+
+.tabs{margin-top:36px;display:flex;gap:4px;border-bottom:1px solid var(--line);overflow-x:auto;scrollbar-width:none}
+.tabs a{padding:12px 14px;font-weight:700;font-size:.95rem;text-decoration:none;color:var(--muted);border-bottom:2px solid transparent;white-space:nowrap}
+.tabs a:hover{color:var(--ink)}
+.tabs a.on{color:var(--plum);border-color:var(--plum)}
+.sec{padding-top:40px;display:grid;gap:16px;scroll-margin-top:90px}
+.sec h2{font-size:1.7rem}
+.sec p{color:var(--muted);max-width:66ch}
+.video{position:relative;border-radius:22px;overflow:hidden;aspect-ratio:16/9;max-width:100%;display:block}
+.video img{width:100%;height:100%;object-fit:cover}
+.video::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%,rgba(20,10,18,.55))}
+.video .play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:76px;height:76px;border-radius:50%;background:#fff;display:grid;place-items:center;z-index:1;box-shadow:0 10px 30px rgba(0,0,0,.3)}
+.video .play svg{width:28px;height:28px;color:#9C5A8C;margin-left:4px}
+.video .cap{position:absolute;left:20px;bottom:16px;z-index:1;color:#fff;font-weight:700}
+.approach{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.approach div{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:18px;display:grid;gap:6px}
+.approach b{font:600 1.08rem var(--display)}
+.approach span{font-size:.92rem;color:var(--muted)}
+.timeline{list-style:none;margin:0;padding:0;display:grid}
+.timeline li{display:grid;grid-template-columns:72px 1fr;gap:16px;padding:14px 0;border-top:1px solid var(--line)}
+.timeline li:first-child{border-top:0}
+.timeline .y{font:600 1.05rem var(--display);color:var(--plum);font-variant-numeric:tabular-nums}
+.timeline b{display:block}
+.timeline span{font-size:.92rem;color:var(--muted)}
+.specs{display:flex;flex-wrap:wrap;gap:8px}
+
+/* Agenda */
+.book{position:sticky;top:calc(88px + env(safe-area-inset-top,0px));background:var(--surface);border:1px solid var(--line);border-radius:24px;box-shadow:var(--shadow);padding:22px;display:grid;gap:16px;scroll-margin-top:90px}
+.book h2{font-size:1.35rem}
+.seg{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.seg button{border:1.5px solid var(--line);background:var(--bg);border-radius:14px;padding:12px;text-align:left;cursor:pointer;color:var(--ink);display:grid;gap:2px;font:inherit}
+.seg button small{font-size:.78rem;color:var(--muted);font-weight:700}
+.seg button b{font:600 1.2rem var(--display);font-variant-numeric:tabular-nums}
+.seg button span{font-size:.8rem;color:var(--muted)}
+.seg button[aria-pressed="true"]{border-color:var(--plum);background:var(--tint)}
+.seg button[aria-pressed="true"] small{color:var(--plum)}
+.week{display:flex;justify-content:space-between;align-items:center;font-weight:700;font-size:.95rem}
+.week button{width:34px;height:34px;border-radius:50%;border:1.5px solid var(--line);background:transparent;color:var(--ink);cursor:pointer;display:grid;place-items:center}
+.week button:disabled{opacity:.35;cursor:default}
+.week svg{width:16px;height:16px}
+.days{display:grid;grid-template-columns:repeat(5,1fr);gap:6px}
+.day{border:1.5px solid var(--line);background:transparent;border-radius:12px;padding:8px 2px;text-align:center;cursor:pointer;color:var(--ink);font:700 .72rem/1.2 var(--body);text-transform:uppercase;letter-spacing:.03em}
+.day b{display:block;font:600 1.25rem/1.15 var(--display);letter-spacing:0}
+.day:disabled{opacity:.35;cursor:default}
+.day[aria-pressed="true"]{background:var(--plum);border-color:var(--plum);color:#fff}
+.slots{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.slot{border:1.5px solid var(--line);background:transparent;border-radius:10px;padding:9px 0;font:700 .9rem var(--body);font-variant-numeric:tabular-nums;color:var(--ink);cursor:pointer}
+.slot:hover{border-color:var(--plum)}
+.slot[aria-pressed="true"]{background:var(--plum-soft);border-color:var(--plum);color:var(--plum-strong)}
+.summary{display:flex;justify-content:space-between;gap:10px;align-items:center;background:var(--sage-soft);color:var(--sage-ink);border-radius:12px;padding:12px 14px;font-size:.9rem}
+.summary b{font-variant-numeric:tabular-nums}
+.book .note{font-size:.82rem;color:var(--muted);text-align:center}
+.mbar{display:none}
+
+@media (max-width:1020px){
+  .p-wrap{grid-template-columns:minmax(0,1fr)}
+  .book{position:static}
+  .mbar{display:flex;position:fixed;left:0;right:0;bottom:0;z-index:30;justify-content:space-between;align-items:center;gap:12px;background:var(--surface);border-top:1px solid var(--line);padding:12px max(16px,env(safe-area-inset-right,0px)) calc(12px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));box-shadow:0 -8px 24px rgba(0,0,0,.08)}
+  .mbar small{display:block;color:var(--muted);font-size:.8rem}
+  .mbar b{font:600 1.15rem var(--display)}
+  .proto{bottom:calc(84px + env(safe-area-inset-bottom,0px))}
+  footer.site{padding-bottom:72px}
+}
+@media (max-width:640px){
+  .p-head{grid-template-columns:96px minmax(0,1fr);gap:18px}
+  .p-head img{width:96px;height:96px;border-radius:20px}
+  .p-facts{grid-template-columns:1fr}
+  .p-facts div{border-left:0;border-top:1px solid var(--line)}
+  .p-facts div:first-child{border-top:0}
+  .approach{grid-template-columns:1fr}
+}
+</style>
+
+<header class="top">
+  <div class="wrap">
+    <a href="v1.html" aria-label="Terapeasy, inicio"><span class="logo"></span></a>
+    <nav aria-label="Principal">
+      <a href="v1.html#terapias" aria-current="page">Terapias</a>
+      <a href="v1.html#como-funciona">Cómo funciona</a>
+      <a href="v1.html#terapeutas">Para terapeutas</a>
+      <a href="v1.html#preguntas">Preguntas</a>
+    </nav>
+    <div class="actions">
+      <a class="login" href="ingresar.html">Iniciar sesión</a>
+      <a class="btn btn-primary" href="registro.html">Crear cuenta</a>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <nav class="crumbs" aria-label="Ruta"><a href="v1.html">Inicio</a><span aria-hidden="true">/</span><a href="terapia.html">Reiki</a><span aria-hidden="true">/</span><span>Camila Rojas</span></nav>
+  <div class="p-wrap">
+    <div>
+      <header class="p-head">
+        <img src="img/camila.jpg" alt="Camila Rojas">
+        <div>
+          <h1>Camila Rojas <svg class="verified" viewBox="0 0 24 24" fill="currentColor" role="img" aria-label="Perfil verificado"><path d="M12 2l2.4 1.8 3-.2.9 2.9 2.5 1.7-1 2.8 1 2.8-2.5 1.7-.9 2.9-3-.2L12 22l-2.4-1.8-3 .2-.9-2.9-2.5-1.7 1-2.8-1-2.8 2.5-1.7.9-2.9 3 .2z"/><path d="M8.5 12.2l2.3 2.3 4.7-4.8" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></h1>
+          <p class="role">Terapeuta floral y reikista · 8 años de experiencia</p>
+          <div class="tags"><span class="tag">Reiki</span><span class="tag">Terapia Floral</span><span class="tag">Ansiedad</span><span class="tag">Procesos de cambio</span></div>
+        </div>
+      </header>
+
+      <div class="p-facts">
+        <div><small>Sesión regular</small><b>60 min · $38.000</b></div>
+        <div><small>Sesión de prueba</small><b>30 min · $15.000</b></div>
+        <div><small>Modalidad</small><b>Videollamada</b></div>
+      </div>
+
+      <nav class="tabs" aria-label="Secciones del perfil" id="tabs">
+        <a href="#sobre" class="on">Sobre mí</a><a href="#enfoque">Cómo trabajo</a><a href="#formacion">Formación</a><a href="#especialidades">Especialidades</a><a href="#preguntas">Preguntas</a>
+      </nav>
+
+      <section class="sec" id="sobre">
+        <h2>Sobre mí</h2>
+        <a class="video" href="#" aria-label="Ver video de presentación de Camila Rojas">
+          <img src="img/camila-video.jpg" alt="">
+          <span class="play"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 4.5v15l13-7.5z"/></svg></span>
+          <span class="cap">Video de presentación · 1:24</span>
+        </a>
+        <p>Soy terapeuta floral y reikista. Llegué a estas terapias después de vivir yo misma un período largo de ansiedad, y desde entonces acompaño a personas que están pasando por cambios: un duelo, una separación, un trabajo nuevo o simplemente la sensación de estar sobrepasadas.</p>
+        <p>Mis sesiones son tranquilas y a tu ritmo. Partimos conversando sobre lo que estás viviendo y luego trabajamos con Reiki a distancia y, si te hace sentido, con una fórmula floral preparada para ti.</p>
+      </section>
+
+      <section class="sec" id="enfoque">
+        <h2>Cómo trabajo</h2>
+        <div class="approach">
+          <div><b>1. Conversamos</b><span>Me cuentas qué te trae y qué te gustaría que cambie.</span></div>
+          <div><b>2. Sesión de Reiki</b><span>Te guío para relajarte mientras trabajamos con la energía.</span></div>
+          <div><b>3. Cierre y plan</b><span>Vemos cómo te sentiste y acordamos los próximos pasos.</span></div>
+        </div>
+      </section>
+
+      <section class="sec" id="formacion">
+        <h2>Formación</h2>
+        <ul class="timeline">
+          <li><span class="y">2021</span><div><b>Maestría en Reiki Usui</b><span>Escuela de Reiki Santiago</span></div></li>
+          <li><span class="y">2018</span><div><b>Diplomado en Terapia Floral de Bach</b><span>Instituto de Terapias Florales</span></div></li>
+          <li><span class="y">2016</span><div><b>Técnico en Terapias Complementarias</b><span>Centro de Formación Holística</span></div></li>
+        </ul>
+      </section>
+
+      <section class="sec" id="especialidades">
+        <h2>Especialidades</h2>
+        <div class="specs"><a class="chip" href="terapia.html">Reiki</a><a class="chip" href="#">Terapia Floral</a><a class="chip" href="#">Ansiedad y estrés</a><a class="chip" href="#">Duelo</a><a class="chip" href="#">Procesos de cambio</a></div>
+      </section>
+
+      <section class="sec faq" id="preguntas">
+        <h2>Preguntas</h2>
+        <div>
+          <details open><summary>¿Qué necesito para la sesión?</summary><p>Un lugar tranquilo, audífonos si tienes, y conexión estable. Puedes estar sentada o recostada, como te sientas más cómoda.</p></details>
+          <details><summary>¿Atiendes fuera de Santiago?</summary><p>Sí. Todas mis sesiones son por videollamada, así que puedes conectarte desde cualquier lugar.</p></details>
+          <details><summary>¿Cómo es la sesión de prueba?</summary><p>Son 30 minutos para conocernos: me cuentas qué buscas, te explico cómo trabajo y hacemos una breve práctica de Reiki.</p></details>
+        </div>
+      </section>
+    </div>
+
+    <aside class="book" id="agenda" aria-label="Agendar con Camila Rojas">
+      <h2>Agenda con Camila</h2>
+      <div class="seg" role="group" aria-label="Tipo de sesión">
+        <button type="button" data-kind="prueba" aria-pressed="true"><small>Primera vez</small><b>$15.000</b><span>Prueba · 30 min</span></button>
+        <button type="button" data-kind="regular" aria-pressed="false"><small>Regular</small><b>$38.000</b><span>Sesión · 60 min</span></button>
+      </div>
+      <div class="week"><button type="button" aria-label="Semana anterior" disabled><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg></button><span>19 – 23 de octubre</span><button type="button" aria-label="Semana siguiente"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></button></div>
+      <div class="days" id="days"></div>
+      <div class="slots" id="slots"></div>
+      <div class="summary"><span id="sum-when">Mié 21 · 11:30</span><b id="sum-what">30 min · $15.000</b></div>
+      <a class="btn btn-primary btn-block" href="ingresar.html" id="go">Continuar</a>
+      <a class="btn btn-ghost btn-block" href="ingresar.html">Enviar mensaje</a>
+      <p class="note">Te pediremos iniciar sesión para confirmar y pagar.</p>
+    </aside>
+  </div>
+</main>
+
+<div class="mbar"><div><small>Sesión de prueba desde</small><b>$15.000</b></div><a class="btn btn-primary" href="#agenda">Agendar</a></div>
+
+<footer class="site">
+  <div class="wrap">
+    <div class="fgrid">
+      <div class="about"><span class="logo"></span><p>Terapeutas de distintas especialidades, con agenda online y sesiones por videollamada.</p></div>
+      <div><h4>Pacientes</h4><ul><li><a href="v1.html#terapias">Terapias</a></li><li><a href="terapia.html">Buscar terapeuta</a></li><li><a href="v1.html#como-funciona">Cómo funciona</a></li><li><a href="v1.html#preguntas">Preguntas</a></li></ul></div>
+      <div><h4>Terapeutas</h4><ul><li><a href="registro.html">Crear perfil</a></li><li><a href="ingresar.html">Iniciar sesión</a></li></ul></div>
+      <div><h4>Síguenos</h4><ul><li><a href="#">Instagram</a></li><li><a href="#">Facebook</a></li><li><a href="#">YouTube</a></li></ul></div>
+    </div>
+    <div class="legal"><span>© 2026 Terapeasy SpA</span><span><a href="#">Términos y condiciones</a> · <a href="#">Privacidad</a></span></div>
+  </div>
+</footer>
+
+<script>
+const D=[{d:"Lun",n:19,s:[]},{d:"Mar",n:20,s:["15:00","17:30"]},{d:"Mié",n:21,s:["09:30","11:30","12:00","16:00","17:30","18:00"]},{d:"Jue",n:22,s:["10:00","11:00","19:00"]},{d:"Vie",n:23,s:["09:00","12:30","16:30","18:00"]}];
+const K={prueba:{t:"30 min",p:"$15.000"},regular:{t:"60 min",p:"$38.000"}};
+let di=2,slot="11:30",kind="prueba";
+const days=document.getElementById("days"),slots=document.getElementById("slots");
+function render(){
+  days.innerHTML=D.map((x,i)=>`<button type="button" class="day" data-i="${i}" aria-pressed="${i===di}" ${x.s.length?"":"disabled"}>${x.d}<b>${x.n}</b></button>`).join("");
+  slots.innerHTML=D[di].s.map(h=>`<button type="button" class="slot" aria-pressed="${h===slot}">${h}</button>`).join("");
+  document.getElementById("sum-when").textContent=`${D[di].d} ${D[di].n} · ${slot}`;
+  document.getElementById("sum-what").textContent=`${K[kind].t} · ${K[kind].p}`;
+}
+days.addEventListener("click",e=>{const b=e.target.closest(".day");if(!b||b.disabled)return;di=+b.dataset.i;slot=D[di].s[0];render()});
+slots.addEventListener("click",e=>{const b=e.target.closest(".slot");if(!b)return;slot=b.textContent;render()});
+document.querySelectorAll(".seg button").forEach(b=>b.addEventListener("click",()=>{kind=b.dataset.kind;document.querySelectorAll(".seg button").forEach(x=>x.setAttribute("aria-pressed",String(x===b)));render()}));
+render();
+document.querySelector(".video").addEventListener("click",e=>e.preventDefault());
+const links=[...document.querySelectorAll("#tabs a")],secs=links.map(a=>document.querySelector(a.getAttribute("href")));
+addEventListener("scroll",()=>{let k=0;secs.forEach((s,i)=>{if(s.getBoundingClientRect().top<160)k=i});links.forEach((a,i)=>a.classList.toggle("on",i===k))},{passive:true});
+</script>
+
+<p class="proto">Prototipo · perfiles y precios de ejemplo</p>
+</body>
+</html>
