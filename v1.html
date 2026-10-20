@@ -12,9 +12,8 @@
 <style>
 /* Layout: aire claro con tinte ciruela; el motivo de los dos arcos del logo se repite como gráfico; una sola banda oscura (terapeutas). */
 :root{
-  /* Paleta del manual de marca: morado #9C5A8C, lavanda claro #E3CFE1, gris oscuro #4B4B4B, verde #A0D5A7, naranjo #FF6B3B */
-  --bg:#FCFAFB; --surface:#FFFFFF; --tint:#F3E9F2; --lavender:#E3CFE1; --ink:#2B1D28; --muted:#4B4B4B; --line:#E6D9E4;
-  --plum:#9C5A8C; --plum-strong:#7E4472; --plum-soft:#E3CFE1;
+  --bg:#FCFAFB; --surface:#FFFFFF; --tint:#F6EFF4; --ink:#2B1D28; --muted:#6C5D68; --line:#EADFE7;
+  --plum:#9C5A8C; --plum-strong:#7E4472; --plum-soft:#EBD9E6;
   --sage:#A0D5A7; --sage-soft:#E3F2E5; --sage-ink:#2E6B3B;
   --coral:#FF6B3B; --coral-soft:#FFE6DC; --coral-ink:#B5401A;
   --band:#5A2C4F; --on-band:#FFF6FB; --on-band-muted:#E2C9DA;
@@ -24,14 +23,14 @@
   --r:14px; --max:1180px;
 }
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
-  --bg:#161017; --surface:#201821; --tint:#251B26; --lavender:#3A2A39; --ink:#F4ECF2; --muted:#B7A7B3; --line:#382B37;
+  --bg:#161017; --surface:#201821; --tint:#251B26; --ink:#F4ECF2; --muted:#B7A7B3; --line:#382B37;
   --plum:#CC8EBC; --plum-strong:#E0AFD3; --plum-soft:#3A2537;
   --sage:#8FC797; --sage-soft:#1F3324; --sage-ink:#A9DDB0;
   --coral:#FF7E54; --coral-soft:#3B2219; --coral-ink:#FFAF92;
   --band:#2C1828; --on-band:#FFF6FB; --on-band-muted:#D3B7CA;
   --shadow:0 1px 2px rgba(0,0,0,.3),0 12px 32px -12px rgba(0,0,0,.6); color-scheme:dark}}
 :root[data-theme="dark"]{
-  --bg:#161017; --surface:#201821; --tint:#251B26; --lavender:#3A2A39; --ink:#F4ECF2; --muted:#B7A7B3; --line:#382B37;
+  --bg:#161017; --surface:#201821; --tint:#251B26; --ink:#F4ECF2; --muted:#B7A7B3; --line:#382B37;
   --plum:#CC8EBC; --plum-strong:#E0AFD3; --plum-soft:#3A2537;
   --sage:#8FC797; --sage-soft:#1F3324; --sage-ink:#A9DDB0;
   --coral:#FF7E54; --coral-soft:#3B2219; --coral-ink:#FFAF92;
@@ -138,7 +137,7 @@ section.block{padding-block:96px}
 .c1 .ico{background:var(--plum-soft);color:var(--plum)}
 .c2 .ico{background:var(--sage-soft);color:var(--sage-ink)}
 .c3 .ico{background:var(--coral-soft);color:var(--coral-ink)}
-.c4 .ico{background:var(--lavender);color:var(--ink)}
+.c4 .ico{background:var(--tint);color:var(--ink)}
 
 /* Trial split */
 .split{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:center}
@@ -162,7 +161,7 @@ section.block{padding-block:96px}
 .pro{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);padding:22px;display:grid;gap:14px}
 .pro .who{align-items:flex-start}
 .pro .tags{display:flex;flex-wrap:wrap;gap:6px}
-.pro .tags span{font-size:.78rem;font-weight:700;padding:.3em .7em;border-radius:999px;background:var(--lavender);color:var(--plum-strong)}
+.pro .tags span{font-size:.78rem;font-weight:600;padding:.3em .7em;border-radius:999px;background:var(--tint);color:var(--plum-strong)}
 .pro blockquote{margin:0;color:var(--muted);font-size:.95rem}
 .pro footer{display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--line);padding-top:14px}
 .pro footer b{font:600 1.1rem var(--display);font-variant-numeric:tabular-nums}
@@ -355,7 +354,7 @@ img.avatar{object-fit:cover;display:block}
   </div>
 </section>
 
-<section class="block" id="terapias" style="background:var(--lavender)">
+<section class="block" id="terapias" style="background:var(--tint)">
   <div class="wrap">
     <div class="head">
       <p class="eyebrow">20 especialidades</p>
