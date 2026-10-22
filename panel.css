@@ -1,5 +1,11 @@
 /* Terapeasy · panel "Mi cuenta" (paciente). Se carga después de base.css. */
 
+/* Solo en el panel: neutros cálidos en vez de rosados; el ciruela queda para acentos. */
+:root{--bg:#FBFAF9; --tint:#F4F2EF; --ink:#262124; --muted:#6B6566; --line:#E7E3DF;
+  --shadow:0 1px 2px rgba(35,28,30,.06),0 12px 32px -12px rgba(35,28,30,.16)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#161017; --tint:#251B26; --ink:#F4ECF2; --muted:#B7A7B3; --line:#382B37; --shadow:0 1px 2px rgba(0,0,0,.3),0 12px 32px -12px rgba(0,0,0,.6)}}
+:root[data-theme="dark"]{--bg:#161017; --tint:#251B26; --ink:#F4ECF2; --muted:#B7A7B3; --line:#382B37; --shadow:0 1px 2px rgba(0,0,0,.3),0 12px 32px -12px rgba(0,0,0,.6)}
+
 /* Header con sesión iniciada */
 .top .icon-btn{position:relative;width:40px;height:40px;border-radius:50%;display:grid;place-items:center;color:var(--ink);text-decoration:none}
 .top .icon-btn:hover{background:var(--tint)}
