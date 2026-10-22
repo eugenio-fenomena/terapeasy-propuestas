@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Mensajes · Terapeasy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;500;600;700&family=Lato:ital,wght@0,400;0,700;0,900;1,400&display=swap">
+<link rel="stylesheet" href="base.css">
+<link rel="stylesheet" href="panel.css">
+</head>
+<body>
+<style>
+/* Mensajes: lista de conversaciones + conversación abierta */
+.chat{display:grid;grid-template-columns:320px minmax(0,1fr);background:var(--surface);border:1px solid var(--line);border-radius:24px;overflow:hidden;height:min(640px,calc(100vh - 220px));min-height:480px}
+.convs{border-right:1px solid var(--line);display:grid;grid-template-rows:auto 1fr;min-height:0}
+.convs .search{padding:14px;border-bottom:1px solid var(--line)}
+.convs .search .input{padding:.6em 1em;border-radius:999px;font-size:.93rem}
+.convs ul{list-style:none;margin:0;padding:6px;overflow-y:auto}
+.convs li button{width:100%;display:grid;grid-template-columns:44px minmax(0,1fr) auto;gap:12px;align-items:center;text-align:left;border:0;background:transparent;border-radius:14px;padding:10px;cursor:pointer;color:var(--ink);font:inherit}
+.convs li button:hover{background:var(--tint)}
+.convs li button[aria-current="true"]{background:var(--tint)}
+.convs img{width:44px;height:44px;border-radius:50%;object-fit:cover}
+.convs b{display:block;font-size:.95rem}
+.convs .prev{display:block;font-size:.85rem;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.convs .t{display:grid;justify-items:end;gap:4px;font-size:.75rem;color:var(--muted)}
+.convs .u{min-width:18px;height:18px;border-radius:999px;background:var(--coral);color:#fff;font:900 .68rem/18px var(--body);text-align:center;padding:0 5px}
+
+.thread{display:grid;grid-template-rows:auto 1fr auto;min-height:0}
+.thead{display:flex;align-items:center;gap:12px;padding:14px 18px;border-bottom:1px solid var(--line)}
+.thead img{width:40px;height:40px;border-radius:50%;object-fit:cover}
+.thead b{display:block}
+.thead small{color:var(--muted)}
+.thead .back{display:none;border:0;background:transparent;color:var(--ink);cursor:pointer;padding:6px;margin-left:-6px}
+.thead .back svg{width:22px;height:22px}
+.thead .btn{margin-left:auto}
+.msgs{overflow-y:auto;padding:20px 18px;display:flex;flex-direction:column;gap:10px;background:var(--bg)}
+.day{align-self:center;font-size:.78rem;font-weight:700;color:var(--muted);background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:3px 12px;margin:6px 0}
+.m{max-width:72%;padding:10px 14px;border-radius:18px;font-size:.95rem;line-height:1.45}
+.m small{display:block;font-size:.72rem;opacity:.7;margin-top:4px;text-align:right}
+.m.them{align-self:flex-start;background:var(--surface);border:1px solid var(--line);border-bottom-left-radius:6px}
+.m.me{align-self:flex-end;background:var(--plum);color:#fff;border-bottom-right-radius:6px}
+.sys{align-self:center;display:flex;gap:8px;align-items:center;font-size:.85rem;color:var(--sage-ink);background:var(--sage-soft);border-radius:12px;padding:8px 12px}
+.compose{display:flex;gap:10px;padding:12px;border-top:1px solid var(--line)}
+.compose .input{border-radius:999px}
+.compose .btn{flex:none}
+
+@media (max-width:860px){
+  .chat{grid-template-columns:minmax(0,1fr);height:calc(100vh - 200px)}
+  .chat.open .convs{display:none}
+  .chat:not(.open) .thread{display:none}
+  .thead .back{display:block}
+  .m{max-width:86%}
+}
+</style>
+
+<header class="top">
+  <div class="wrap">
+    <a href="v1.html" aria-label="Terapeasy, inicio"><span class="logo"></span></a>
+    <nav aria-label="Principal">
+      <a href="terapia.html">Busca tu terapeuta</a>
+      <a href="v1.html#como-funciona">Cómo funciona</a>
+    </nav>
+    <div class="actions">
+      <a class="icon-btn" href="#" aria-label="Carrito"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M2 3h3l2.4 12.2a1 1 0 0 0 1 .8h9.7a1 1 0 0 0 1-.8L21 7H6"/></svg></a>
+      <a class="icon-btn" href="cuenta-mensajes.html" aria-label="Mensajes, 2 sin leer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></svg><span class="dot">2</span></a>
+      <a class="icon-btn" href="#" aria-label="Avisos, 1 nuevo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 1 1 12 0c0 7 3 8 3 8H3s3-1 3-8"/><path d="M10 20a2 2 0 0 0 4 0"/></svg><span class="dot">1</span></a>
+      <a class="me" href="cuenta-sesiones.html"><img src="img/p-valentina.jpg" alt=""><span>Valentina</span></a>
+    </div>
+  </div>
+</header>
+
+<main>
+<div class="ph">
+  <div class="wrap">
+    <div><h1>Mensajes</h1><p class="sub">Conversa con tus terapeutas antes y después de cada sesión.</p></div>
+    <nav class="ptabs" aria-label="Mi cuenta"><a href="cuenta-sesiones.html">Sesiones</a><a href="cuenta-mensajes.html" aria-current="page">Mensajes<span class="n">2</span></a><a href="cuenta-boletas.html">Boletas</a><a href="cuenta-perfil.html">Perfil</a></nav>
+  </div>
+</div>
+
+<div class="wrap pbody">
+  <div class="chat open" id="chat">
+    <aside class="convs" aria-label="Conversaciones">
+      <div class="search"><label class="sr" for="q">Buscar conversación</label><input class="input" id="q" type="search" placeholder="Buscar terapeuta"></div>
+      <ul id="list"></ul>
+    </aside>
+    <section class="thread" aria-label="Conversación">
+      <header class="thead">
+        <button class="back" type="button" id="back" aria-label="Volver a las conversaciones"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg></button>
+        <img id="t-img" src="img/t-camila.jpg" alt="">
+        <div><b id="t-name">Camila Rojas</b><small id="t-sub">Próxima sesión: jue 23 oct, 18:00</small></div>
+        <a class="btn btn-ghost btn-sm" href="terapeuta.html">Ver perfil</a>
+      </header>
+      <div class="msgs" id="msgs"></div>
+      <form class="compose" id="compose">
+        <label class="sr" for="txt">Escribe un mensaje</label>
+        <input class="input" id="txt" placeholder="Escribe un mensaje" autocomplete="off">
+        <button class="btn btn-primary" type="submit">Enviar</button>
+      </form>
+    </section>
+  </div>
+</div>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <div class="fgrid">
+      <div class="about"><span class="logo"></span><p>Terapeutas de distintas especialidades, con agenda online y sesiones por videollamada.</p></div>
+      <div><h4>Pacientes</h4><ul><li><a href="v1.html#terapias">Terapias</a></li><li><a href="terapia.html">Buscar terapeuta</a></li><li><a href="v1.html#como-funciona">Cómo funciona</a></li><li><a href="v1.html#preguntas">Preguntas</a></li></ul></div>
+      <div><h4>Terapeutas</h4><ul><li><a href="registro.html">Crear perfil</a></li><li><a href="ingresar.html">Iniciar sesión</a></li></ul></div>
+      <div><h4>Síguenos</h4><ul><li><a href="#">Instagram</a></li><li><a href="#">Facebook</a></li><li><a href="#">YouTube</a></li></ul></div>
+    </div>
+    <div class="legal"><span>© 2026 Terapeasy SpA</span><span><a href="#">Términos y condiciones</a> · <a href="#">Privacidad</a></span></div>
+  </div>
+</footer>
+
+<script>
+const C=[
+ {id:"camila",n:"Camila Rojas",sub:"Próxima sesión: jue 23 oct, 18:00",t:"10:42",u:2,msgs:[
+   {d:"Ayer"},{s:"sys",x:"Agendaste una sesión de prueba para el jueves 23 a las 18:00."},
+   {s:"them",x:"Hola Valentina, gracias por agendar. ¿Hay algo que quieras contarme antes de la sesión?",h:"18:20"},
+   {s:"me",x:"¡Hola Camila! Ando con mucho estrés en el trabajo y me cuesta dormir.",h:"18:34"},
+   {d:"Hoy"},{s:"them",x:"Gracias por contarme. Lo vemos con calma el jueves.",h:"10:41"},
+   {s:"them",x:"Te recomiendo conectarte desde un lugar tranquilo y, si puedes, con audífonos.",h:"10:42"}]},
+ {id:"carmen",n:"Carmen Soto",sub:"Última sesión: mar 14 oct",t:"Lun",u:0,msgs:[
+   {d:"Lunes"},{s:"them",x:"Valentina, ya subí la boleta de nuestra última sesión.",h:"09:12"},{s:"me",x:"¡Gracias Carmen!",h:"09:30"}]},
+ {id:"matias",n:"Matías Vergara",sub:"Próxima sesión: lun 3 nov, 10:00",t:"12 oct",u:0,msgs:[
+   {d:"12 de octubre"},{s:"me",x:"Hola Matías, ¿atiendes temas de pareja?",h:"20:05"},{s:"them",x:"Hola Valentina, sí. En la sesión de prueba vemos qué buscas y te cuento cómo trabajo.",h:"21:10"}]}
+];
+let cur=C[0];
+const list=document.getElementById("list"),msgs=document.getElementById("msgs"),chat=document.getElementById("chat");
+function drawList(){
+  list.innerHTML=C.map(c=>`<li><button type="button" data-id="${c.id}" aria-current="${c===cur}"><img src="img/t-${c.id}.jpg" alt=""><span style="min-width:0"><b>${c.n}</b><span class="prev">${c.msgs.filter(m=>m.x).slice(-1)[0].x}</span></span><span class="t">${c.t}${c.u?`<span class="u">${c.u}</span>`:""}</span></button></li>`).join("");
+}
+function drawThread(){
+  document.getElementById("t-img").src=`img/t-${cur.id}.jpg`;
+  document.getElementById("t-name").textContent=cur.n;document.getElementById("t-sub").textContent=cur.sub;
+  msgs.innerHTML=cur.msgs.map(m=>m.d?`<span class="day">${m.d}</span>`:m.s==="sys"?`<p class="sys">${m.x}</p>`:`<p class="m ${m.s}">${m.x}<small>${m.h}</small></p>`).join("");
+  msgs.scrollTop=msgs.scrollHeight;
+}
+list.addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;cur=C.find(c=>c.id===b.dataset.id);cur.u=0;drawList();drawThread();chat.classList.add("open")});
+document.getElementById("back").addEventListener("click",()=>chat.classList.remove("open"));
+document.getElementById("compose").addEventListener("submit",e=>{e.preventDefault();const t=document.getElementById("txt");if(!t.value.trim())return;cur.msgs.push({s:"me",x:t.value.trim().replace(/</g,"&lt;"),h:"Ahora"});t.value="";drawList();drawThread()});
+if(matchMedia("(max-width:860px)").matches) chat.classList.remove("open");
+drawList();drawThread();
+</script>
+
+<p class="proto">Prototipo · perfiles y precios de ejemplo</p>
+</body>
+</html>

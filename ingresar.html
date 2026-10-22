@@ -63,7 +63,7 @@
         <div class="field"><label for="pass">Contraseña</label><div class="pw"><input class="input" id="pass" type="password" autocomplete="current-password" required><button type="button" id="show" aria-label="Mostrar contraseña">Mostrar</button></div></div>
         <div class="row-between"><label class="check" for="rem"><input type="checkbox" id="rem"><span>Recordarme</span></label><a class="link" href="#">¿Olvidaste tu contraseña?</a></div>
         <button class="btn btn-primary btn-block" type="submit">Iniciar sesión</button>
-        <p class="okmsg" id="ok" hidden>Prototipo: aquí entrarías a tu cuenta. No se envió ningún dato.</p>
+        <p class="okmsg" id="ok" hidden>Prototipo: no se envía ningún dato.</p>
       </form>
       <p class="switch-line">¿No tienes cuenta? <a class="link" href="registro.html">Crea una gratis</a></p>
     </div>
@@ -83,7 +83,7 @@
 
 <script>
 document.getElementById("show").addEventListener("click",e=>{const p=document.getElementById("pass");const v=p.type==="password";p.type=v?"text":"password";e.target.textContent=v?"Ocultar":"Mostrar";e.target.setAttribute("aria-label",v?"Ocultar contraseña":"Mostrar contraseña")});
-document.getElementById("f").addEventListener("submit",e=>{e.preventDefault();document.getElementById("ok").hidden=false});
+document.getElementById("f").addEventListener("submit",e=>{e.preventDefault();location.href="cuenta-sesiones.html"});
 </script>
 
 <p class="proto">Prototipo · perfiles y precios de ejemplo</p>

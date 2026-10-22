@@ -81,7 +81,7 @@ header.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;backgroun
 .verified{display:inline-block;width:18px;height:18px;color:var(--plum);vertical-align:-2px}
 
 /* Formularios */
-.field{display:grid;gap:6px}
+.field{display:grid;gap:6px;align-content:start}
 .field label{font-weight:700;font-size:.9rem}
 .input,.select{width:100%;border:1.5px solid var(--line);background:var(--surface);color:var(--ink);border-radius:12px;padding:.8em 1em;font:400 1rem var(--body)}
 .input:focus,.select:focus{outline:none;border-color:var(--plum);box-shadow:0 0 0 3px var(--plum-soft)}
