@@ -1,10 +1,16 @@
 /* Terapeasy · panel "Mi cuenta" (paciente). Se carga después de base.css. */
 
+/* Solo en el panel del paciente: fondos y grises neutros cálidos; el ciruela queda para acentos. */
+:root{--bg:#FBFAF9; --tint:#F4F2EF; --ink:#262124; --muted:#6B6566; --line:#E7E3DF;
+  --shadow:0 1px 2px rgba(35,28,30,.06),0 12px 32px -12px rgba(35,28,30,.16)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#161017; --tint:#251B26; --ink:#F4ECF2; --muted:#B7A7B3; --line:#382B37}}
+:root[data-theme="dark"]{--bg:#161017; --tint:#251B26; --ink:#F4ECF2; --muted:#B7A7B3; --line:#382B37}
+
 /* Header con sesión iniciada */
 .top .icon-btn{position:relative;width:40px;height:40px;border-radius:50%;display:grid;place-items:center;color:var(--ink);text-decoration:none}
 .top .icon-btn:hover{background:var(--tint)}
 .top .icon-btn svg{width:21px;height:21px}
-.top .icon-btn .dot{position:absolute;top:6px;right:6px;min-width:17px;height:17px;padding:0 4px;border-radius:999px;background:var(--coral);color:#fff;font:900 .66rem/17px var(--body);text-align:center;border:2px solid var(--bg);box-sizing:content-box}
+.top .icon-btn .dot{position:absolute;top:2px;right:0;min-width:16px;height:16px;padding:0 4px;border-radius:999px;background:var(--coral);color:#fff;font:900 .64rem/16px var(--body);text-align:center;border:2px solid var(--bg);box-sizing:content-box}
 .top .me{display:flex;align-items:center;gap:8px;padding:4px 12px 4px 4px;border-radius:999px;border:1.5px solid var(--line);font-weight:700;font-size:.92rem;text-decoration:none;background:var(--surface)}
 .top .me img{width:30px;height:30px;border-radius:50%;object-fit:cover}
 .top .me:hover{border-color:var(--plum)}
