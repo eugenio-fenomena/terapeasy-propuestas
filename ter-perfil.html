@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Mi perfil de terapeuta · Terapeasy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;500;600;700&family=Lato:ital,wght@0,400;0,700;0,900;1,400&display=swap">
+<link rel="stylesheet" href="base.css">
+<link rel="stylesheet" href="panel.css">
+</head>
+<body>
+<style>
+/* Perfil del terapeuta: edición con avance + vista previa de la tarjeta */
+.pf{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:28px;align-items:start}
+.secs{display:grid;gap:20px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:24px;display:grid;gap:16px}
+.card h2{font-size:1.3rem;display:flex;justify-content:space-between;align-items:center;gap:10px}
+.card .lead{color:var(--muted);font-size:.93rem;margin-top:-8px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+textarea.input{min-height:120px;resize:vertical;font:inherit}
+.hint{font-size:.82rem;color:var(--muted)}
+.video{display:grid;justify-items:center;gap:10px;text-align:center;border:1.5px dashed var(--line);border-radius:16px;padding:28px 18px;background:var(--tint)}
+.video i{width:52px;height:52px;border-radius:16px;background:var(--surface);color:var(--plum);display:grid;place-items:center}
+.video i svg{width:26px;height:26px}
+.video p{color:var(--muted);font-size:.92rem;max-width:44ch}
+.edu{display:grid;gap:10px}
+.edu .row{display:grid;grid-template-columns:90px minmax(0,1fr) minmax(0,1fr) auto;gap:10px;align-items:end}
+.edu .rm{border:0;background:transparent;color:var(--muted);cursor:pointer;padding:12px 6px;font-size:1.1rem}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips label{display:inline-flex;align-items:center;gap:6px;border:1.5px solid var(--line);border-radius:999px;padding:.4em .9em;font-weight:700;font-size:.9rem;cursor:pointer}
+.chips input{accent-color:var(--plum);margin:0}
+.chips label:has(input:checked){border-color:var(--plum);color:var(--plum-strong)}
+
+aside.prev{position:sticky;top:calc(92px + env(safe-area-inset-top,0px));display:grid;gap:14px}
+.progress{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:20px;display:grid;gap:10px}
+.progress h3{font-size:1.1rem}
+.pbar{height:8px;border-radius:999px;background:var(--line);overflow:hidden}
+.pbar i{display:block;height:100%;width:80%;background:var(--sage-ink)}
+.progress ul{list-style:none;margin:0;padding:0;display:grid;gap:6px;font-size:.9rem}
+.progress li{display:flex;gap:8px;align-items:center}
+.progress li svg{width:18px;height:18px;color:var(--sage-ink);flex:none}
+.progress li.miss{color:var(--coral-ink);font-weight:700}
+.progress li.miss::before{content:"";width:18px;height:18px;flex:none;border-radius:50%;border:2px solid var(--coral);box-sizing:border-box}
+.mini{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:18px;display:grid;gap:10px}
+.mini small{font-size:.75rem;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--muted)}
+.mini .who{display:flex;gap:12px;align-items:center}
+.mini img{width:56px;height:56px;border-radius:50%;object-fit:cover}
+.mini b{display:block;font:600 1.15rem var(--display)}
+.mini p{font-size:.9rem;color:var(--muted)}
+.save{display:flex;justify-content:flex-end;gap:10px;align-items:center}
+.saved{font-weight:700;color:var(--sage-ink);font-size:.9rem}
+@media (max-width:1000px){.pf{grid-template-columns:minmax(0,1fr)}aside.prev{position:static;order:-1}}
+@media (max-width:600px){.two{grid-template-columns:1fr}.edu .row{grid-template-columns:1fr 1fr}.edu .row .field:nth-child(2),.edu .row .field:nth-child(3){grid-column:1/-1}}
+</style>
+
+<header class="top">
+  <div class="wrap">
+    <a href="v1.html" aria-label="Terapeasy, inicio"><span class="logo"></span></a>
+    <nav aria-label="Principal">
+      <a href="ter-agenda.html">Mi panel</a>
+      <a href="terapeuta.html">Mi perfil público</a>
+    </nav>
+    <div class="actions">
+      <a class="icon-btn" href="#" aria-label="Mensajes, 2 sin leer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></svg><span class="dot">2</span></a>
+      <a class="icon-btn" href="#" aria-label="Avisos, 1 nuevo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 1 1 12 0c0 7 3 8 3 8H3s3-1 3-8"/><path d="M10 20a2 2 0 0 0 4 0"/></svg><span class="dot">1</span></a>
+      <a class="me" href="ter-agenda.html"><img src="img/t-camila.jpg" alt=""><span>Camila</span></a>
+    </div>
+  </div>
+</header>
+
+<main>
+<div class="ph">
+  <div class="wrap">
+    <div><h1>Mi perfil</h1><p class="sub">Lo que ven los pacientes cuando te buscan.</p></div>
+    <nav class="ptabs" aria-label="Panel del terapeuta"><a href="ter-agenda.html">Agenda</a><a href="ter-disponibilidad.html">Disponibilidad y precios</a><a href="ter-ganancias.html">Ganancias</a><a href="ter-boletas.html">Boletas<span class="n">2</span></a><a href="ter-perfil.html" aria-current="page">Mi perfil</a></nav>
+  </div>
+</div>
+
+<div class="wrap pbody">
+  <div class="pf">
+    <div class="secs">
+      <form class="card">
+        <h2>Presentación</h2>
+        <p class="lead">Es lo primero que leen los pacientes en tu tarjeta y tu perfil.</p>
+        <div class="two">
+          <div class="field"><label for="tit">Título</label><input class="input" id="tit" value="Terapeuta floral y reikista"></div>
+          <div class="field"><label for="exp">Años de experiencia</label><input class="input" id="exp" type="number" value="8" min="0"></div>
+        </div>
+        <div class="field"><label for="corta">Descripción breve <span class="hint">(aparece en tu tarjeta)</span></label><input class="input" id="corta" maxlength="160" value="Acompaño procesos de ansiedad y cambio combinando Reiki y esencias florales, con sesiones tranquilas y a tu ritmo."><span class="hint" id="c1">118/160</span></div>
+        <div class="field"><label for="larga">Sobre mí</label><textarea class="input" id="larga">Soy terapeuta floral y reikista. Llegué a estas terapias después de vivir yo misma un período largo de ansiedad, y desde entonces acompaño a personas que están pasando por cambios.</textarea></div>
+        <div class="field"><span style="font-weight:700;font-size:.9rem">Especialidades</span><div class="chips"><label><input type="checkbox" checked>Reiki</label><label><input type="checkbox" checked>Terapia Floral</label><label><input type="checkbox">Meditación Terapéutica</label><label><input type="checkbox">Sintergética</label><label><input type="checkbox">Otras técnicas energéticas</label></div></div>
+        <div class="save"><span class="saved" hidden>Guardado</span><button class="btn btn-primary" type="submit">Guardar</button></div>
+      </form>
+
+      <section class="card">
+        <h2>Video de presentación <span class="pill wait">Falta</span></h2>
+        <div class="video">
+          <i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="14" height="12" rx="2"/><path d="M16 10l6-3v10l-6-3"/></svg></i>
+          <b>Agrega un video de 1 a 2 minutos</b>
+          <p>Los perfiles con video generan más confianza. Cuéntales quién eres y cómo es una sesión contigo. Pega el link de YouTube.</p>
+          <div style="display:flex;gap:8px;width:100%;max-width:440px"><label class="sr" for="yt">Link de YouTube</label><input class="input" id="yt" placeholder="https://youtube.com/…"><button class="btn btn-primary" type="button">Agregar</button></div>
+        </div>
+      </section>
+
+      <form class="card">
+        <h2>Formación</h2>
+        <div class="edu" id="edu">
+          <div class="row"><div class="field"><label>Año</label><input class="input" value="2021"></div><div class="field"><label>Título</label><input class="input" value="Maestría en Reiki Usui"></div><div class="field"><label>Institución</label><input class="input" value="Escuela de Reiki Santiago"></div><button class="rm" type="button" aria-label="Quitar">×</button></div>
+          <div class="row"><div class="field"><label>Año</label><input class="input" value="2018"></div><div class="field"><label>Título</label><input class="input" value="Diplomado en Terapia Floral de Bach"></div><div class="field"><label>Institución</label><input class="input" value="Instituto de Terapias Florales"></div><button class="rm" type="button" aria-label="Quitar">×</button></div>
+        </div>
+        <div class="save" style="justify-content:space-between"><button class="btn btn-ghost btn-sm" type="button" id="addedu">+ Agregar formación</button><span style="display:flex;gap:10px;align-items:center"><span class="saved" hidden>Guardado</span><button class="btn btn-primary" type="submit">Guardar</button></span></div>
+      </form>
+    </div>
+
+    <aside class="prev">
+      <div class="progress">
+        <h3>Tu perfil está al 80%</h3>
+        <div class="pbar"><i></i></div>
+        <ul>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Foto y presentación</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Formación</li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Horarios y precios</li>
+          <li class="miss">Video de presentación</li>
+        </ul>
+      </div>
+      <div class="mini">
+        <small>Así te ven los pacientes</small>
+        <div class="who"><img src="img/t-camila.jpg" alt=""><div><b>Camila Rojas</b><span class="hint">Terapeuta floral y reikista · 8 años</span></div></div>
+        <p id="prevtxt">Acompaño procesos de ansiedad y cambio combinando Reiki y esencias florales, con sesiones tranquilas y a tu ritmo.</p>
+        <a class="btn btn-ghost btn-block" href="terapeuta.html">Ver mi perfil público</a>
+      </div>
+    </aside>
+  </div>
+</div>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <div class="fgrid">
+      <div class="about"><span class="logo"></span><p>Terapeutas de distintas especialidades, con agenda online y sesiones por videollamada.</p></div>
+      <div><h4>Pacientes</h4><ul><li><a href="v1.html#terapias">Terapias</a></li><li><a href="terapia.html">Buscar terapeuta</a></li><li><a href="v1.html#como-funciona">Cómo funciona</a></li><li><a href="v1.html#preguntas">Preguntas</a></li></ul></div>
+      <div><h4>Terapeutas</h4><ul><li><a href="registro.html">Crear perfil</a></li><li><a href="ingresar.html">Iniciar sesión</a></li></ul></div>
+      <div><h4>Síguenos</h4><ul><li><a href="#">Instagram</a></li><li><a href="#">Facebook</a></li><li><a href="#">YouTube</a></li></ul></div>
+    </div>
+    <div class="legal"><span>© 2026 Terapeasy SpA</span><span><a href="#">Términos y condiciones</a> · <a href="#">Privacidad</a></span></div>
+  </div>
+</footer>
+<script>
+document.querySelectorAll("form.card").forEach(f=>f.addEventListener("submit",e=>{e.preventDefault();const s=f.querySelector(".saved");s.hidden=false;setTimeout(()=>s.hidden=true,2500)}));
+const c=document.getElementById("corta");c.addEventListener("input",()=>{document.getElementById("c1").textContent=c.value.length+"/160";document.getElementById("prevtxt").textContent=c.value});
+const edu=document.getElementById("edu");edu.addEventListener("click",e=>{if(e.target.classList.contains("rm"))e.target.closest(".row").remove()});
+document.getElementById("addedu").addEventListener("click",()=>{const r=edu.querySelector(".row").cloneNode(true);r.querySelectorAll("input").forEach(i=>i.value="");edu.appendChild(r)});
+</script>
+
+<p class="proto">Prototipo · perfiles y precios de ejemplo</p>
+</body>
+</html>

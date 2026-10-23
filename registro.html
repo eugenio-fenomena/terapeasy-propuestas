@@ -121,7 +121,7 @@ document.querySelectorAll('input[name="rol"]').forEach(r=>r.addEventListener("ch
   document.getElementById("msg-pac").hidden=t;document.getElementById("msg-ter").hidden=!t;
 }));
 document.getElementById("show").addEventListener("click",e=>{const p=document.getElementById("pass");const v=p.type==="password";p.type=v?"text":"password";e.target.textContent=v?"Ocultar":"Mostrar"});
-document.getElementById("f").addEventListener("submit",e=>{e.preventDefault();document.getElementById("ok").hidden=false});
+document.getElementById("f").addEventListener("submit",e=>{e.preventDefault();location.href=document.getElementById("r-ter").checked?"ter-agenda.html":"cuenta-sesiones.html"});
 </script>
 
 <p class="proto">Prototipo · perfiles y precios de ejemplo</p>

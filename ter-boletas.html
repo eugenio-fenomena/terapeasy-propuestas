@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Boletas · Terapeasy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;500;600;700&family=Lato:ital,wght@0,400;0,700;0,900;1,400&display=swap">
+<link rel="stylesheet" href="base.css">
+<link rel="stylesheet" href="panel.css">
+</head>
+<body>
+<style>
+/* Boletas del terapeuta: sesiones realizadas con estado de boleta y subida */
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
+.filters button{border:1.5px solid var(--line);background:var(--surface);border-radius:999px;padding:.5em 1em;font:700 .9rem var(--body);color:var(--muted);cursor:pointer}
+.filters button[aria-pressed="true"]{border-color:var(--plum);color:var(--plum);background:var(--surface)}
+.list{display:grid;gap:10px}
+.it{display:grid;grid-template-columns:48px minmax(0,1fr) 140px auto;gap:16px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:14px 18px}
+.it img{width:48px;height:48px;border-radius:50%;object-fit:cover}
+.it b{display:block}
+.it .meta{font-size:.88rem;color:var(--muted)}
+.it .amt{font-variant-numeric:tabular-nums;font-weight:700;text-align:right}
+.it .amt small{display:block;font-weight:400;font-size:.8rem;color:var(--muted)}
+.it .act{display:flex;gap:10px;align-items:center;justify-content:flex-end;min-width:170px}
+.it.pend{border-color:var(--coral);box-shadow:0 0 0 3px var(--coral-soft)}
+.up{position:relative;overflow:hidden}
+.up input{position:absolute;inset:0;opacity:0;cursor:pointer}
+.file{font-size:.85rem;font-weight:700;color:var(--sage-ink);display:flex;gap:6px;align-items:center}
+.file svg{width:16px;height:16px}
+@media (max-width:760px){.it{grid-template-columns:44px minmax(0,1fr)}.it img{width:44px;height:44px}.it .amt{text-align:left}.it .amt,.it .act{grid-column:2}.it .act{justify-content:flex-start}}
+</style>
+
+<header class="top">
+  <div class="wrap">
+    <a href="v1.html" aria-label="Terapeasy, inicio"><span class="logo"></span></a>
+    <nav aria-label="Principal">
+      <a href="ter-agenda.html">Mi panel</a>
+      <a href="terapeuta.html">Mi perfil público</a>
+    </nav>
+    <div class="actions">
+      <a class="icon-btn" href="#" aria-label="Mensajes, 2 sin leer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></svg><span class="dot">2</span></a>
+      <a class="icon-btn" href="#" aria-label="Avisos, 1 nuevo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 1 1 12 0c0 7 3 8 3 8H3s3-1 3-8"/><path d="M10 20a2 2 0 0 0 4 0"/></svg><span class="dot">1</span></a>
+      <a class="me" href="ter-agenda.html"><img src="img/t-camila.jpg" alt=""><span>Camila</span></a>
+    </div>
+  </div>
+</header>
+
+<main>
+<div class="ph">
+  <div class="wrap">
+    <div><h1>Boletas</h1><p class="sub">Sube la boleta de cada sesión realizada.</p></div>
+    <nav class="ptabs" aria-label="Panel del terapeuta"><a href="ter-agenda.html">Agenda</a><a href="ter-disponibilidad.html">Disponibilidad y precios</a><a href="ter-ganancias.html">Ganancias</a><a href="ter-boletas.html" aria-current="page">Boletas<span class="n">2</span></a><a href="ter-perfil.html">Mi perfil</a></nav>
+  </div>
+</div>
+
+<div class="wrap pbody">
+  <div class="note-box" style="margin-bottom:20px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v5h1"/></svg><span>Emite la boleta en el SII por el monto que pagó el paciente y súbela aquí en PDF. Tu paciente la recibe automáticamente.</span></div>
+  <div class="filters" role="group" aria-label="Filtrar"><button type="button" aria-pressed="true" data-f="all">Todas</button><button type="button" aria-pressed="false" data-f="pend">Por subir (2)</button><button type="button" aria-pressed="false" data-f="ok">Subidas</button></div>
+  <div class="list" id="list">
+    <div class="it pend" data-s="pend"><img src="img/p-valentina.jpg" alt=""><div><b>Valentina Pérez</b><span class="meta">Mar 14 oct · Reiki · 60 min</span></div><div class="amt">$38.000<small>Pagó el paciente</small></div><div class="act"><label class="btn btn-primary btn-sm up">Subir boleta<input type="file" accept="application/pdf" aria-label="Subir boleta de Valentina Pérez"></label></div></div>
+    <div class="it pend" data-s="pend"><img src="img/p-rodrigo.jpg" alt=""><div><b>Rodrigo Díaz</b><span class="meta">Jue 16 oct · Reiki · 60 min</span></div><div class="amt">$38.000<small>Pagó el paciente</small></div><div class="act"><label class="btn btn-primary btn-sm up">Subir boleta<input type="file" accept="application/pdf" aria-label="Subir boleta de Rodrigo Díaz"></label></div></div>
+    <div class="it" data-s="ok"><img src="img/p-francisca.jpg" alt=""><div><b>Francisca León</b><span class="meta">Lun 13 oct · Terapia Floral · 60 min</span></div><div class="amt">$35.000<small>Pagó el paciente</small></div><div class="act"><span class="file"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Boleta subida</span><a class="lnk" href="#" style="font-weight:700;color:var(--plum);text-decoration:none;font-size:.9rem">Ver</a></div></div>
+    <div class="it" data-s="ok"><img src="img/p-josefa.jpg" alt=""><div><b>Josefa Muñoz</b><span class="meta">Vie 10 oct · Sesión de prueba · 30 min</span></div><div class="amt">$15.000<small>Pagó el paciente</small></div><div class="act"><span class="file"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Boleta subida</span><a class="lnk" href="#" style="font-weight:700;color:var(--plum);text-decoration:none;font-size:.9rem">Ver</a></div></div>
+  </div>
+</div>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <div class="fgrid">
+      <div class="about"><span class="logo"></span><p>Terapeutas de distintas especialidades, con agenda online y sesiones por videollamada.</p></div>
+      <div><h4>Pacientes</h4><ul><li><a href="v1.html#terapias">Terapias</a></li><li><a href="terapia.html">Buscar terapeuta</a></li><li><a href="v1.html#como-funciona">Cómo funciona</a></li><li><a href="v1.html#preguntas">Preguntas</a></li></ul></div>
+      <div><h4>Terapeutas</h4><ul><li><a href="registro.html">Crear perfil</a></li><li><a href="ingresar.html">Iniciar sesión</a></li></ul></div>
+      <div><h4>Síguenos</h4><ul><li><a href="#">Instagram</a></li><li><a href="#">Facebook</a></li><li><a href="#">YouTube</a></li></ul></div>
+    </div>
+    <div class="legal"><span>© 2026 Terapeasy SpA</span><span><a href="#">Términos y condiciones</a> · <a href="#">Privacidad</a></span></div>
+  </div>
+</footer>
+<script>
+document.querySelectorAll(".filters button").forEach(b=>b.addEventListener("click",()=>{document.querySelectorAll(".filters button").forEach(x=>x.setAttribute("aria-pressed",String(x===b)));document.querySelectorAll(".it").forEach(i=>i.hidden=!(b.dataset.f==="all"||i.dataset.s===b.dataset.f))}));
+document.querySelectorAll(".up input").forEach(inp=>inp.addEventListener("change",()=>{if(!inp.files.length)return;const it=inp.closest(".it");it.classList.remove("pend");it.dataset.s="ok";it.querySelector(".act").innerHTML='<span class="file"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Boleta subida</span>'}));
+document.querySelectorAll(".lnk").forEach(a=>a.addEventListener("click",e=>e.preventDefault()));
+</script>
+
+<p class="proto">Prototipo · perfiles y precios de ejemplo</p>
+</body>
+</html>

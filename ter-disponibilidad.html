@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Disponibilidad y precios · Terapeasy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;500;600;700&family=Lato:ital,wght@0,400;0,700;0,900;1,400&display=swap">
+<link rel="stylesheet" href="base.css">
+<link rel="stylesheet" href="panel.css">
+</head>
+<body>
+<style>
+/* Disponibilidad: horario semanal, bloqueos y tipos de sesión */
+.card{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:24px;display:grid;gap:16px}
+.card h2{font-size:1.35rem}
+.card .lead{color:var(--muted);font-size:.93rem;margin-top:-8px}
+.stack{display:grid;gap:20px}
+.g2{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:20px;align-items:start}
+
+.days{display:grid}
+.d{display:grid;grid-template-columns:120px minmax(0,1fr);gap:14px;align-items:center;padding:12px 0;border-top:1px solid var(--line)}
+.d:first-child{border-top:0}
+.d .name{display:flex;gap:10px;align-items:center;font-weight:700}
+.ranges{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.range{display:inline-flex;align-items:center;gap:6px;background:var(--tint);border-radius:10px;padding:6px 8px 6px 12px;font-weight:700;font-size:.92rem;font-variant-numeric:tabular-nums}
+.range button{border:0;background:transparent;color:var(--muted);cursor:pointer;width:22px;height:22px;border-radius:6px;font-size:1rem;line-height:1}
+.range button:hover{background:var(--line);color:var(--ink)}
+.add{border:1.5px dashed var(--line);background:transparent;color:var(--plum);font-weight:700;font-size:.88rem;border-radius:10px;padding:6px 12px;cursor:pointer}
+.add:hover{border-color:var(--plum)}
+.off{color:var(--muted);font-size:.92rem}
+.d.closed .ranges{opacity:.5}
+
+.blocks{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.blocks li{display:flex;justify-content:space-between;gap:10px;align-items:center;background:var(--tint);border-radius:12px;padding:12px 14px}
+.blocks b{display:block}
+.blocks span{font-size:.85rem;color:var(--muted)}
+.blocks button{border:0;background:transparent;color:var(--coral-ink);font-weight:700;cursor:pointer;font:700 .88rem var(--body)}
+.newb{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.newb .field:last-child{grid-column:1/-1}
+
+.types{display:grid;gap:10px}
+.type{display:grid;grid-template-columns:minmax(0,1.3fr) 110px 150px minmax(0,1fr) auto;gap:14px;align-items:center;border:1px solid var(--line);border-radius:14px;padding:14px 16px}
+.type b{display:block}
+.type small{display:block;font-size:.82rem;color:var(--muted)}
+.type .money{position:relative}
+.type .money .input{padding-left:1.7em;font-variant-numeric:tabular-nums}
+.type .money::before{content:"$";position:absolute;left:.8em;top:50%;transform:translateY(-50%);color:var(--muted)}
+.type .net{font-size:.85rem;color:var(--muted)}
+.type .net b{font-size:1rem;color:var(--sage-ink);font-variant-numeric:tabular-nums}
+.type .tags{display:flex;flex-wrap:wrap;gap:4px}
+.type.fixed{background:var(--tint)}
+.save{display:flex;justify-content:flex-end;gap:10px;align-items:center}
+.saved{font-weight:700;color:var(--sage-ink);font-size:.9rem}
+.typehead{display:grid;grid-template-columns:minmax(0,1.3fr) 110px 150px minmax(0,1fr) auto;gap:14px;padding:0 16px;font-size:.75rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+
+@media (max-width:1000px){.g2{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:860px){.typehead{display:none}.type{grid-template-columns:1fr 1fr}.type>div:first-child,.type .tags{grid-column:1/-1}}
+@media (max-width:560px){.d{grid-template-columns:1fr}.newb{grid-template-columns:1fr}}
+</style>
+
+<header class="top">
+  <div class="wrap">
+    <a href="v1.html" aria-label="Terapeasy, inicio"><span class="logo"></span></a>
+    <nav aria-label="Principal">
+      <a href="ter-agenda.html">Mi panel</a>
+      <a href="terapeuta.html">Mi perfil público</a>
+    </nav>
+    <div class="actions">
+      <a class="icon-btn" href="#" aria-label="Mensajes, 2 sin leer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></svg><span class="dot">2</span></a>
+      <a class="icon-btn" href="#" aria-label="Avisos, 1 nuevo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 1 1 12 0c0 7 3 8 3 8H3s3-1 3-8"/><path d="M10 20a2 2 0 0 0 4 0"/></svg><span class="dot">1</span></a>
+      <a class="me" href="ter-agenda.html"><img src="img/t-camila.jpg" alt=""><span>Camila</span></a>
+    </div>
+  </div>
+</header>
+
+<main>
+<div class="ph">
+  <div class="wrap">
+    <div><h1>Disponibilidad y precios</h1><p class="sub">Define cuándo atiendes y cuánto cobras.</p></div>
+    <nav class="ptabs" aria-label="Panel del terapeuta"><a href="ter-agenda.html">Agenda</a><a href="ter-disponibilidad.html" aria-current="page">Disponibilidad y precios</a><a href="ter-ganancias.html">Ganancias</a><a href="ter-boletas.html">Boletas<span class="n">2</span></a><a href="ter-perfil.html">Mi perfil</a></nav>
+  </div>
+</div>
+
+<div class="wrap pbody stack">
+  <div class="g2">
+    <section class="card">
+      <h2>Horario semanal</h2>
+      <p class="lead">Los pacientes solo ven las horas dentro de estos rangos. Las sesiones se ofrecen cada 30 minutos.</p>
+      <div class="days" id="days"></div>
+      <div class="save"><span class="saved" hidden>Horario guardado</span><button class="btn btn-primary" type="button" data-save>Guardar horario</button></div>
+    </section>
+
+    <section class="card">
+      <h2>Bloqueos</h2>
+      <p class="lead">Vacaciones, trámites o días libres. En esas fechas no se puede agendar.</p>
+      <ul class="blocks" id="blocks">
+        <li><div><b>Vacaciones</b><span>20 dic – 5 ene</span></div><button type="button">Quitar</button></li>
+        <li><div><b>Trámite</b><span>Vie 31 oct · 09:00 – 13:00</span></div><button type="button">Quitar</button></li>
+      </ul>
+      <form class="newb" id="newb">
+        <div class="field"><label for="b1">Desde</label><input class="input" id="b1" type="date" required></div>
+        <div class="field"><label for="b2">Hasta</label><input class="input" id="b2" type="date" required></div>
+        <div class="field"><label for="b3">Motivo <span class="muted" style="font-weight:400">(solo lo ves tú)</span></label><input class="input" id="b3" placeholder="Ej: vacaciones"></div>
+        <button class="btn btn-ghost" type="submit" style="grid-column:1/-1">Agregar bloqueo</button>
+      </form>
+    </section>
+  </div>
+
+  <section class="card">
+    <h2>Tipos de sesión y precios</h2>
+    <p class="lead">Lo que pagan tus pacientes y lo que recibes tú después de la comisión de Terapeasy.</p>
+    <div class="typehead"><span>Sesión</span><span>Duración</span><span>Precio paciente</span><span>Terapias</span><span>Tú recibes</span></div>
+    <div class="types">
+      <div class="type fixed"><div><b>Sesión de prueba</b><small>Duración fija de la plataforma</small></div><span><b>30 min</b></span><div class="money"><label class="sr" for="p0">Precio sesión de prueba</label><input class="input" id="p0" inputmode="numeric" value="15.000" data-p></div><div class="tags"><span class="tag">Todas</span></div><div class="net">Tú recibes<br><b data-n>$12.750</b></div></div>
+      <div class="type"><div><b>Reiki</b><small>Sesión regular</small></div><select class="select" aria-label="Duración Reiki"><option>30 min</option><option selected>60 min</option><option>90 min</option><option>120 min</option></select><div class="money"><label class="sr" for="p1">Precio Reiki</label><input class="input" id="p1" inputmode="numeric" value="38.000" data-p></div><div class="tags"><span class="tag">Reiki</span></div><div class="net">Tú recibes<br><b data-n>$32.300</b></div></div>
+      <div class="type"><div><b>Terapia Floral</b><small>Incluye fórmula personalizada</small></div><select class="select" aria-label="Duración Terapia Floral"><option>30 min</option><option selected>60 min</option><option>90 min</option></select><div class="money"><label class="sr" for="p2">Precio Terapia Floral</label><input class="input" id="p2" inputmode="numeric" value="35.000" data-p></div><div class="tags"><span class="tag">Terapia Floral</span></div><div class="net">Tú recibes<br><b data-n>$29.750</b></div></div>
+    </div>
+    <div class="save" style="justify-content:space-between"><button class="add" type="button">+ Agregar tipo de sesión</button><span style="display:flex;gap:10px;align-items:center"><span class="saved" hidden>Precios guardados</span><button class="btn btn-primary" type="button" data-save>Guardar precios</button></span></div>
+    <p class="muted" style="font-size:.82rem">Comisión de ejemplo (15%) para el prototipo: el cálculo real lo hace el sistema.</p>
+  </section>
+</div>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <div class="fgrid">
+      <div class="about"><span class="logo"></span><p>Terapeutas de distintas especialidades, con agenda online y sesiones por videollamada.</p></div>
+      <div><h4>Pacientes</h4><ul><li><a href="v1.html#terapias">Terapias</a></li><li><a href="terapia.html">Buscar terapeuta</a></li><li><a href="v1.html#como-funciona">Cómo funciona</a></li><li><a href="v1.html#preguntas">Preguntas</a></li></ul></div>
+      <div><h4>Terapeutas</h4><ul><li><a href="registro.html">Crear perfil</a></li><li><a href="ingresar.html">Iniciar sesión</a></li></ul></div>
+      <div><h4>Síguenos</h4><ul><li><a href="#">Instagram</a></li><li><a href="#">Facebook</a></li><li><a href="#">YouTube</a></li></ul></div>
+    </div>
+    <div class="legal"><span>© 2026 Terapeasy SpA</span><span><a href="#">Términos y condiciones</a> · <a href="#">Privacidad</a></span></div>
+  </div>
+</footer>
+<script>
+const H=[["Lunes",["09:00 – 13:00","15:00 – 19:00"]],["Martes",["09:00 – 13:00","15:00 – 19:00"]],["Miércoles",["15:00 – 20:00"]],["Jueves",["09:00 – 13:00","15:00 – 19:00"]],["Viernes",["09:00 – 13:00"]],["Sábado",[]],["Domingo",[]]];
+const days=document.getElementById("days");
+function draw(){
+  days.innerHTML=H.map(([n,r],i)=>`<div class="d${r.length?"":" closed"}"><span class="name"><label class="switch"><input type="checkbox" data-i="${i}" ${r.length?"checked":""} aria-label="Atiendo el ${n.toLowerCase()}"><span></span></label>${n}</span><div class="ranges">${r.length?r.map((x,j)=>`<span class="range">${x}<button type="button" aria-label="Quitar rango" data-i="${i}" data-j="${j}">×</button></span>`).join("")+`<button class="add" type="button" data-add="${i}">+ Rango</button>`:`<span class="off">No atiendes</span>`}</div></div>`).join("");
+}
+days.addEventListener("click",e=>{const b=e.target.closest("button");if(!b)return;if(b.dataset.add){H[b.dataset.add][1].push("16:00 – 18:00")}else if(b.dataset.j!==undefined){H[b.dataset.i][1].splice(b.dataset.j,1)}draw()});
+days.addEventListener("change",e=>{const c=e.target;if(c.dataset.i===undefined)return;H[c.dataset.i][1]=c.checked?["09:00 – 13:00"]:[];draw()});
+draw();
+document.querySelectorAll("[data-save]").forEach(b=>b.addEventListener("click",()=>{const s=b.parentElement.querySelector(".saved");s.hidden=false;setTimeout(()=>s.hidden=true,2500)}));
+document.getElementById("blocks").addEventListener("click",e=>{if(e.target.tagName==="BUTTON")e.target.closest("li").remove()});
+document.getElementById("newb").addEventListener("submit",e=>{e.preventDefault();const f=v=>new Date(v+"T12:00").toLocaleDateString("es-CL",{day:"numeric",month:"short"});const li=document.createElement("li");li.innerHTML=`<div><b>${document.getElementById("b3").value.replace(/</g,"&lt;")||"Bloqueo"}</b><span>${f(b1.value)} – ${f(b2.value)}</span></div><button type="button">Quitar</button>`;document.getElementById("blocks").appendChild(li);e.target.reset()});
+document.querySelectorAll("[data-p]").forEach(inp=>inp.addEventListener("input",()=>{const v=parseInt(inp.value.replace(/\D/g,""))||0;inp.closest(".type").querySelector("[data-n]").textContent="$"+Math.round(v*.85).toLocaleString("es-CL")}));
+</script>
+
+<p class="proto">Prototipo · perfiles y precios de ejemplo</p>
+</body>
+</html>
