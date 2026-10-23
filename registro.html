@@ -83,7 +83,7 @@
         </div>
         <div class="field"><label for="email">Correo</label><input class="input" id="email" type="email" autocomplete="email" placeholder="tu@correo.cl" required></div>
         <div class="field"><label for="pass">Contraseña</label><div class="pw"><input class="input" id="pass" type="password" autocomplete="new-password" minlength="8" required><button type="button" id="show" aria-label="Mostrar contraseña">Mostrar</button></div><span class="muted" style="font-size:.82rem">Mínimo 8 caracteres.</span></div>
-        <label class="check" for="acepto"><input type="checkbox" id="acepto" required><span>Acepto los <a class="link" href="#">términos y condiciones</a> y la <a class="link" href="#">política de privacidad</a>.</span></label>
+        <label class="check" for="acepto"><input type="checkbox" id="acepto" required><span>Acepto los <a class="link" href="terminos.html">términos y condiciones</a> y la <a class="link" href="privacidad.html">política de privacidad</a>.</span></label>
         <button class="btn btn-primary btn-block" type="submit" id="cta">Crear cuenta</button>
         <p class="okmsg" id="ok" hidden>Prototipo: aquí se crearía tu cuenta. No se envió ningún dato.</p>
       </form>
@@ -120,10 +120,11 @@ document.querySelectorAll('input[name="rol"]').forEach(r=>r.addEventListener("ch
   cta.textContent=t?"Crear cuenta de terapeuta":"Crear cuenta";
   document.getElementById("msg-pac").hidden=t;document.getElementById("msg-ter").hidden=!t;
 }));
+try{if(sessionStorage.getItem("te-rol")==="terapeuta"){sessionStorage.removeItem("te-rol");const r=document.getElementById("r-ter");r.checked=true;r.dispatchEvent(new Event("change"))}}catch(e){}
 document.getElementById("show").addEventListener("click",e=>{const p=document.getElementById("pass");const v=p.type==="password";p.type=v?"text":"password";e.target.textContent=v?"Ocultar":"Mostrar"});
 document.getElementById("f").addEventListener("submit",e=>{e.preventDefault();location.href=document.getElementById("r-ter").checked?"ter-agenda.html":"cuenta-sesiones.html"});
 </script>
 
-<p class="proto">Prototipo · perfiles y precios de ejemplo</p>
+<a class="proto" href="mapa.html">Prototipo · ver todas las pantallas</a>
 </body>
 </html>

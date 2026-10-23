@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Confirmar y pagar · Terapeasy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;500;600;700&family=Lato:ital,wght@0,400;0,700;0,900;1,400&display=swap">
+<link rel="stylesheet" href="base.css">
+<link rel="stylesheet" href="panel.css">
+</head>
+<body>
+<style>
+/* Confirmar y pagar: pasos a la izquierda, resumen fijo a la derecha */
+.cf{display:grid;grid-template-columns:minmax(0,1fr) 380px;gap:32px;align-items:start;padding-block:28px 96px}
+.cf h1{font-size:clamp(2rem,4vw,2.6rem)}
+.back{display:inline-flex;gap:6px;align-items:center;font-weight:700;color:var(--plum);text-decoration:none;font-size:.92rem;margin-bottom:14px}
+.back svg{width:16px;height:16px}
+.steps{display:grid;gap:16px;margin-top:22px}
+.st{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:22px;display:grid;gap:14px}
+.st h2{font-size:1.15rem;display:flex;gap:10px;align-items:center}
+.st h2 i{width:26px;height:26px;border-radius:50%;background:var(--plum);color:#fff;font:900 .8rem/26px var(--body);text-align:center;font-style:normal}
+.ses{display:grid;grid-template-columns:64px minmax(0,1fr) auto;gap:16px;align-items:center}
+.ses img{width:64px;height:64px;border-radius:50%;object-fit:cover}
+.ses b{display:block;font:600 1.15rem var(--display)}
+.ses .meta{color:var(--muted);font-size:.92rem}
+.ses .when{font-weight:700;margin-top:4px;font-variant-numeric:tabular-nums}
+.ses a{font-weight:700;color:var(--plum);text-decoration:none;font-size:.92rem}
+textarea.input{min-height:100px;resize:vertical;font:inherit}
+.hint{font-size:.82rem;color:var(--muted)}
+.pay{display:grid;gap:10px}
+.pay label{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:14px;align-items:center;border:1.5px solid var(--line);border-radius:14px;padding:14px 16px;cursor:pointer}
+.pay label:has(input:checked){border-color:var(--plum);background:var(--tint)}
+.pay label.dis{opacity:.55;cursor:not-allowed}
+.pay input{accent-color:var(--plum);width:18px;height:18px;margin:0}
+.pay b{display:block}
+.pay span{font-size:.85rem;color:var(--muted)}
+.pay .brand{font:900 .78rem var(--body);letter-spacing:.04em;color:var(--muted);border:1px solid var(--line);border-radius:6px;padding:4px 8px}
+
+.sum{position:sticky;top:calc(92px + env(safe-area-inset-top,0px));background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:22px;box-shadow:var(--shadow);display:grid;gap:14px}
+.sum h2{font-size:1.2rem}
+.line{display:flex;justify-content:space-between;gap:10px;font-size:.95rem}
+.line span{color:var(--muted)}
+.line b{font-variant-numeric:tabular-nums}
+.total{display:flex;justify-content:space-between;align-items:baseline;border-top:1px solid var(--line);padding-top:14px}
+.total b{font:600 1.8rem var(--display);font-variant-numeric:tabular-nums}
+.sum .check{font-size:.85rem}
+.sum .safe{display:flex;gap:8px;align-items:center;justify-content:center;font-size:.82rem;color:var(--muted)}
+.sum .safe svg{width:16px;height:16px;color:var(--sage-ink)}
+.trialtag{justify-self:start}
+@media (max-width:980px){.cf{grid-template-columns:minmax(0,1fr)}.sum{position:static}}
+@media (max-width:560px){.ses{grid-template-columns:52px minmax(0,1fr)}.ses img{width:52px;height:52px}.ses a{grid-column:2}}
+</style>
+
+<header class="top">
+  <div class="wrap">
+    <a href="v1.html" aria-label="Terapeasy, inicio"><span class="logo"></span></a>
+    <nav aria-label="Principal">
+      <a href="terapeutas.html">Busca tu terapeuta</a>
+      <a href="v1.html#como-funciona">Cómo funciona</a>
+    </nav>
+    <div class="actions">
+      <a class="icon-btn" href="confirmar.html" aria-label="Carrito"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M2 3h3l2.4 12.2a1 1 0 0 0 1 .8h9.7a1 1 0 0 0 1-.8L21 7H6"/></svg></a>
+      <a class="icon-btn" href="cuenta-mensajes.html" aria-label="Mensajes, 2 sin leer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></svg><span class="dot">2</span></a>
+      <a class="icon-btn" href="cuenta-avisos.html" aria-label="Avisos, 1 nuevo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 1 1 12 0c0 7 3 8 3 8H3s3-1 3-8"/><path d="M10 20a2 2 0 0 0 4 0"/></svg><span class="dot">1</span></a>
+      <a class="me" href="cuenta-sesiones.html"><img src="img/p-valentina.jpg" alt=""><span>Valentina</span></a>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="cf">
+    <div>
+      <a class="back" href="terapeuta.html#agenda"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg>Volver al perfil de Camila</a>
+      <h1>Confirma tu sesión</h1>
+      <div class="steps">
+        <section class="st">
+          <h2><i>1</i>Tu sesión</h2>
+          <div class="ses">
+            <img src="img/t-camila.jpg" alt="Camila Rojas">
+            <div><b>Camila Rojas</b><span class="meta" id="kind">Sesión de prueba · 30 min · Videollamada</span><p class="when" id="when">Miércoles 21 de octubre · 11:30</p></div>
+            <a href="terapeuta.html#agenda">Cambiar</a>
+          </div>
+        </section>
+        <section class="st">
+          <h2><i>2</i>Cuéntale a Camila qué te trae <span class="hint" style="font-family:var(--body);font-weight:400">(opcional)</span></h2>
+          <label class="sr" for="msg">Mensaje para tu terapeuta</label>
+          <textarea class="input" id="msg" placeholder="Por ejemplo: ando con mucho estrés en el trabajo y me cuesta dormir."></textarea>
+          <span class="hint">Solo lo ve tu terapeuta. Le ayuda a preparar la sesión.</span>
+        </section>
+        <section class="st">
+          <h2><i>3</i>Medio de pago</h2>
+          <div class="pay" role="radiogroup" aria-label="Medio de pago">
+            <label><input type="radio" name="pago" checked><div><b>Tarjeta de crédito o débito</b><span>Pagas en Webpay y vuelves a Terapeasy.</span></div><span class="brand">WEBPAY</span></label>
+            <label class="dis"><input type="radio" name="pago" disabled><div><b>Saldo Terapeasy</b><span>Disponible: $0</span></div><span></span></label>
+          </div>
+        </section>
+      </div>
+    </div>
+
+    <aside class="sum" aria-label="Resumen">
+      <h2>Resumen</h2>
+      <span class="pill wait trialtag" id="tag">Primera sesión con Camila</span>
+      <div class="line"><span id="l-kind">Sesión de prueba · 30 min</span><b id="l-price">$15.000</b></div>
+      <div class="line"><span>Cargo por servicio</span><b>$0</b></div>
+      <div class="total"><span>Total</span><b id="total">$15.000</b></div>
+      <label class="check" for="pol"><input type="checkbox" id="pol" checked><span>Entiendo que puedo cancelar hasta 24 horas antes con devolución total.</span></label>
+      <a class="btn btn-primary btn-block" href="agendada.html" id="pay">Pagar $15.000</a>
+      <p class="safe"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>Pago seguro. No guardamos tu tarjeta.</p>
+    </aside>
+  </div>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <div class="fgrid">
+      <div class="about"><span class="logo"></span><p>Terapeutas de distintas especialidades, con agenda online y sesiones por videollamada.</p></div>
+      <div><h4>Pacientes</h4><ul><li><a href="v1.html#terapias">Terapias</a></li><li><a href="terapeutas.html">Buscar terapeuta</a></li><li><a href="v1.html#como-funciona">Cómo funciona</a></li><li><a href="v1.html#preguntas">Preguntas</a></li></ul></div>
+      <div><h4>Terapeutas</h4><ul><li><a href="para-terapeutas.html">Para terapeutas</a></li><li><a href="registro.html">Crear perfil</a></li><li><a href="ingresar.html">Iniciar sesión</a></li></ul></div>
+      <div><h4>Síguenos</h4><ul><li><a href="#">Instagram</a></li><li><a href="#">Facebook</a></li><li><a href="#">YouTube</a></li></ul></div>
+    </div>
+    <div class="legal"><span>© 2026 Terapeasy SpA</span><span><a href="terminos.html">Términos y condiciones</a> · <a href="privacidad.html">Privacidad</a></span></div>
+  </div>
+</footer>
+<script>
+let sel=null;try{sel=JSON.parse(sessionStorage.getItem("te-reserva")||"null")}catch(e){}
+if(sel){
+  const k=sel.kind==="regular"?{t:"Sesión regular · 60 min",p:"$38.000"}:{t:"Sesión de prueba · 30 min",p:"$15.000"};
+  document.getElementById("kind").textContent=k.t+" · Videollamada";
+  document.getElementById("when").textContent=sel.when;
+  document.getElementById("l-kind").textContent=k.t;document.getElementById("l-price").textContent=k.p;document.getElementById("total").textContent=k.p;
+  document.getElementById("pay").textContent="Pagar "+k.p;
+  if(sel.kind==="regular")document.getElementById("tag").hidden=true;
+}
+const pol=document.getElementById("pol"),pay=document.getElementById("pay");
+pol.addEventListener("change",()=>{pay.style.pointerEvents=pol.checked?"":"none";pay.style.opacity=pol.checked?"":".5"});
+</script>
+
+<a class="proto" href="mapa.html">Prototipo · ver todas las pantallas</a>
+</body>
+</html>

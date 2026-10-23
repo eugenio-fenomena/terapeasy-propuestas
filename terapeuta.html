@@ -102,10 +102,10 @@
   <div class="wrap">
     <a href="v1.html" aria-label="Terapeasy, inicio"><span class="logo"></span></a>
     <nav aria-label="Principal">
+      <a href="terapeutas.html">Busca tu terapeuta</a>
       <a href="v1.html#terapias" aria-current="page">Terapias</a>
       <a href="v1.html#como-funciona">Cómo funciona</a>
-      <a href="v1.html#terapeutas">Para terapeutas</a>
-      <a href="v1.html#preguntas">Preguntas</a>
+      <a href="para-terapeutas.html">Para terapeutas</a>
     </nav>
     <div class="actions">
       <a class="login" href="ingresar.html">Iniciar sesión</a>
@@ -168,7 +168,7 @@
 
       <section class="sec" id="especialidades">
         <h2>Especialidades</h2>
-        <div class="specs"><a class="chip" href="terapia.html">Reiki</a><a class="chip" href="#">Terapia Floral</a><a class="chip" href="#">Ansiedad y estrés</a><a class="chip" href="#">Duelo</a><a class="chip" href="#">Procesos de cambio</a></div>
+        <div class="specs"><a class="chip" href="terapia.html">Reiki</a><a class="chip" href="terapia.html">Terapia Floral</a><a class="chip" href="terapia.html">Ansiedad y estrés</a><a class="chip" href="terapia.html">Duelo</a><a class="chip" href="terapia.html">Procesos de cambio</a></div>
       </section>
 
       <section class="sec faq" id="preguntas">
@@ -204,11 +204,11 @@
   <div class="wrap">
     <div class="fgrid">
       <div class="about"><span class="logo"></span><p>Terapeutas de distintas especialidades, con agenda online y sesiones por videollamada.</p></div>
-      <div><h4>Pacientes</h4><ul><li><a href="v1.html#terapias">Terapias</a></li><li><a href="terapia.html">Buscar terapeuta</a></li><li><a href="v1.html#como-funciona">Cómo funciona</a></li><li><a href="v1.html#preguntas">Preguntas</a></li></ul></div>
-      <div><h4>Terapeutas</h4><ul><li><a href="registro.html">Crear perfil</a></li><li><a href="ingresar.html">Iniciar sesión</a></li></ul></div>
+      <div><h4>Pacientes</h4><ul><li><a href="v1.html#terapias">Terapias</a></li><li><a href="terapeutas.html">Buscar terapeuta</a></li><li><a href="v1.html#como-funciona">Cómo funciona</a></li><li><a href="v1.html#preguntas">Preguntas</a></li></ul></div>
+      <div><h4>Terapeutas</h4><ul><li><a href="para-terapeutas.html">Para terapeutas</a></li><li><a href="registro.html">Crear perfil</a></li><li><a href="ingresar.html">Iniciar sesión</a></li></ul></div>
       <div><h4>Síguenos</h4><ul><li><a href="#">Instagram</a></li><li><a href="#">Facebook</a></li><li><a href="#">YouTube</a></li></ul></div>
     </div>
-    <div class="legal"><span>© 2026 Terapeasy SpA</span><span><a href="#">Términos y condiciones</a> · <a href="#">Privacidad</a></span></div>
+    <div class="legal"><span>© 2026 Terapeasy SpA</span><span><a href="terminos.html">Términos y condiciones</a> · <a href="privacidad.html">Privacidad</a></span></div>
   </div>
 </footer>
 
@@ -227,11 +227,13 @@ days.addEventListener("click",e=>{const b=e.target.closest(".day");if(!b||b.disa
 slots.addEventListener("click",e=>{const b=e.target.closest(".slot");if(!b)return;slot=b.textContent;render()});
 document.querySelectorAll(".seg button").forEach(b=>b.addEventListener("click",()=>{kind=b.dataset.kind;document.querySelectorAll(".seg button").forEach(x=>x.setAttribute("aria-pressed",String(x===b)));render()}));
 render();
+const FULL={Lun:"Lunes",Mar:"Martes","Mié":"Miércoles",Jue:"Jueves",Vie:"Viernes"};
+document.getElementById("go").addEventListener("click",()=>{try{sessionStorage.setItem("te-reserva",JSON.stringify({kind,when:`${FULL[D[di].d]} ${D[di].n} de octubre · ${slot}`}));sessionStorage.setItem("te-next","confirmar.html")}catch(e){}});
 document.querySelector(".video").addEventListener("click",e=>e.preventDefault());
 const links=[...document.querySelectorAll("#tabs a")],secs=links.map(a=>document.querySelector(a.getAttribute("href")));
 addEventListener("scroll",()=>{let k=0;secs.forEach((s,i)=>{if(s.getBoundingClientRect().top<160)k=i});links.forEach((a,i)=>a.classList.toggle("on",i===k))},{passive:true});
 </script>
 
-<p class="proto">Prototipo · perfiles y precios de ejemplo</p>
+<a class="proto" href="mapa.html">Prototipo · ver todas las pantallas</a>
 </body>
 </html>

@@ -113,6 +113,8 @@ footer.site .wrap{padding-block:56px 28px;display:grid;gap:40px}
 /* Aviso de prototipo */
 .proto{position:fixed;right:max(16px,env(safe-area-inset-right,0px));bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:40;background:var(--ink);color:var(--bg);font-size:.8rem;font-weight:700;padding:8px 14px;border-radius:999px;box-shadow:0 8px 24px rgba(0,0,0,.25)}
 .proto a{color:inherit}
+a.proto{text-decoration:none}
+a.proto:hover{background:var(--plum)}
 
 @media (max-width:980px){
   .top nav{display:none}

@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Mapa del prototipo · Terapeasy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;500;600;700&family=Lato:ital,wght@0,400;0,700;0,900;1,400&display=swap">
+<link rel="stylesheet" href="base.css">
+</head>
+<body>
+<style>
+/* Índice de todas las pantallas del prototipo, agrupadas por recorrido */
+.mp{padding-block:40px 96px;display:grid;gap:36px}
+.mp h1{font-size:clamp(2.2rem,4.4vw,3rem)}
+.mp .lead{color:var(--muted);max-width:60ch;margin-top:10px}
+.grp h2{font-size:1.35rem;margin-bottom:6px}
+.grp p{color:var(--muted);font-size:.93rem;margin-bottom:14px}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}
+.cards a{display:grid;gap:4px;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:16px 18px;text-decoration:none;transition:border-color .2s}
+.cards a:hover{border-color:var(--plum)}
+.cards b{font:600 1.08rem var(--display)}
+.cards span{font-size:.86rem;color:var(--muted)}
+.cards small{font-size:.72rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--plum)}
+.flow{display:flex;flex-wrap:wrap;gap:6px;align-items:center;font-size:.9rem;font-weight:700;margin-bottom:14px}
+.flow i{font-style:normal;color:var(--muted)}
+</style>
+
+<header class="top">
+  <div class="wrap">
+    <a href="v1.html" aria-label="Terapeasy, inicio"><span class="logo"></span></a>
+    <nav aria-label="Principal">
+      <a href="terapeutas.html">Busca tu terapeuta</a>
+      <a href="v1.html#terapias">Terapias</a>
+      <a href="v1.html#como-funciona">Cómo funciona</a>
+      <a href="para-terapeutas.html">Para terapeutas</a>
+    </nav>
+    <div class="actions">
+      <a class="login" href="ingresar.html">Iniciar sesión</a>
+      <a class="btn btn-primary" href="registro.html">Crear cuenta</a>
+    </div>
+  </div>
+</header>
+
+<main class="wrap mp">
+  <div>
+    <p class="eyebrow">Prototipo Terapeasy</p>
+    <h1 style="margin-top:8px">Todas las pantallas</h1>
+    <p class="lead">Atajo para revisar cualquier pantalla. También puedes recorrer el sitio desde el home como lo haría un paciente o un terapeuta. Los perfiles, precios y datos son de ejemplo.</p>
+  </div>
+
+  <section class="grp">
+    <h2>Sitio público</h2>
+    <div class="cards">
+      <a href="index.html"><small>1</small><b>Home</b><span>Portada con buscador y terapias</span></a>
+      <a href="terapia.html"><small>2</small><b>Página de terapia</b><span>Ejemplo: Reiki, con listado de terapeutas</span></a>
+      <a href="terapeuta.html"><small>3</small><b>Perfil del terapeuta</b><span>Ejemplo: Camila Rojas, con agenda</span></a>
+      <a href="registro.html"><small>4</small><b>Crear cuenta</b><span>Paciente o terapeuta</span></a>
+      <a href="ingresar.html"><small>5</small><b>Iniciar sesión</b><span>Con correo o Google</span></a>
+      <a href="terapeutas.html"><small>6</small><b>Todos los terapeutas</b><span>Listado con filtro por terapia</span></a>
+      <a href="para-terapeutas.html"><small>7</small><b>Para terapeutas</b><span>Página para sumar terapeutas</span></a>
+    </div>
+  </section>
+
+  <section class="grp">
+    <h2>Cuenta y legal</h2>
+    <div class="cards">
+      <a href="recuperar.html"><b>Recuperar contraseña</b><span>Pedir el enlace por correo</span></a>
+      <a href="nueva-clave.html"><b>Crear nueva contraseña</b><span>Desde el enlace del correo</span></a>
+      <a href="terminos.html"><b>Términos y condiciones</b><span>Diseño listo, texto pendiente</span></a>
+      <a href="privacidad.html"><b>Política de privacidad</b><span>Diseño listo, texto pendiente</span></a>
+    </div>
+  </section>
+
+  <section class="grp">
+    <h2>Agendar una sesión</h2>
+    <div class="flow"><span>Perfil</span><i>→</i><span>Iniciar sesión</span><i>→</i><span>Confirmar y pagar</span><i>→</i><span>Sesión agendada</span><i>→</i><span>Sala de espera</span></div>
+    <div class="cards">
+      <a href="confirmar.html"><b>Confirmar y pagar</b><span>Resumen, mensaje al terapeuta y pago</span></a>
+      <a href="agendada.html"><b>Sesión agendada</b><span>Confirmación y próximos pasos</span></a>
+      <a href="sala.html"><b>Sala de espera y videollamada</b><span>Prueba de cámara y micrófono, y la llamada</span></a>
+    </div>
+  </section>
+
+  <section class="grp">
+    <h2>Panel del paciente</h2>
+    <div class="cards">
+      <a href="cuenta-sesiones.html"><b>Sesiones</b><span>Próxima sesión, próximas y pasadas</span></a>
+      <a href="cuenta-sesion.html"><b>Detalle de una sesión</b><span>Reagendar y cancelar (regla de 24 h)</span></a>
+      <a href="cuenta-avisos.html"><b>Avisos</b><span>Recordatorios, pagos y boletas</span></a>
+      <a href="cuenta-mensajes.html"><b>Mensajes</b><span>Conversaciones con terapeutas</span></a>
+      <a href="cuenta-boletas.html"><b>Boletas</b><span>Descarga de boletas</span></a>
+      <a href="cuenta-perfil.html"><b>Perfil</b><span>Datos, avisos y contraseña</span></a>
+    </div>
+  </section>
+
+  <section class="grp">
+    <h2>Panel del terapeuta</h2>
+    <div class="cards">
+      <a href="ter-agenda.html"><b>Agenda</b><span>Hoy, la semana y pendientes</span></a>
+      <a href="ter-disponibilidad.html"><b>Disponibilidad y precios</b><span>Horarios, bloqueos y tipos de sesión</span></a>
+      <a href="ter-ganancias.html"><b>Ganancias</b><span>Resumen, pagos y datos bancarios</span></a>
+      <a href="ter-boletas.html"><b>Boletas</b><span>Subir la boleta de cada sesión</span></a>
+      <a href="ter-perfil.html"><b>Mi perfil</b><span>Lo que ven los pacientes</span></a>
+      <a href="ter-avisos.html"><b>Avisos</b><span>Reservas, cancelaciones y pagos</span></a>
+    </div>
+  </section>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <div class="fgrid">
+      <div class="about"><span class="logo"></span><p>Terapeutas de distintas especialidades, con agenda online y sesiones por videollamada.</p></div>
+      <div><h4>Pacientes</h4><ul><li><a href="v1.html#terapias">Terapias</a></li><li><a href="terapeutas.html">Buscar terapeuta</a></li><li><a href="v1.html#como-funciona">Cómo funciona</a></li><li><a href="v1.html#preguntas">Preguntas</a></li></ul></div>
+      <div><h4>Terapeutas</h4><ul><li><a href="para-terapeutas.html">Para terapeutas</a></li><li><a href="registro.html">Crear perfil</a></li><li><a href="ingresar.html">Iniciar sesión</a></li></ul></div>
+      <div><h4>Síguenos</h4><ul><li><a href="#">Instagram</a></li><li><a href="#">Facebook</a></li><li><a href="#">YouTube</a></li></ul></div>
+    </div>
+    <div class="legal"><span>© 2026 Terapeasy SpA</span><span><a href="terminos.html">Términos y condiciones</a> · <a href="privacidad.html">Privacidad</a></span></div>
+  </div>
+</footer>
+
+<a class="proto" href="mapa.html">Prototipo · ver todas las pantallas</a>
+</body>
+</html>

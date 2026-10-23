@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Sala de espera · Terapeasy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;500;600;700&family=Lato:ital,wght@0,400;0,700;0,900;1,400&display=swap">
+<link rel="stylesheet" href="base.css">
+<link rel="stylesheet" href="panel.css">
+</head>
+<body>
+<style>
+/* Sala de espera (prueba de cámara/micrófono) y videollamada en curso */
+.room{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:32px;align-items:center;padding-block:40px 96px}
+.cam{position:relative;border-radius:24px;overflow:hidden;aspect-ratio:16/10;background:#1D1519;max-width:100%}
+.cam img{width:100%;height:100%;object-fit:cover;transform:scaleX(-1)}
+.cam .off{position:absolute;inset:0;display:none;place-items:center;color:#E9DCE5;font-weight:700;background:#1D1519}
+.cam.nocam img{display:none}.cam.nocam .off{display:grid}
+.cam .name{position:absolute;left:14px;bottom:14px;background:rgba(20,12,18,.6);color:#fff;border-radius:999px;padding:6px 12px;font-size:.85rem;font-weight:700}
+.cam .ctrl{position:absolute;left:50%;bottom:14px;transform:translateX(-50%);display:flex;gap:10px}
+.cam .ctrl button{width:46px;height:46px;border-radius:50%;border:0;background:rgba(255,255,255,.18);color:#fff;cursor:pointer;display:grid;place-items:center;backdrop-filter:blur(6px)}
+.cam .ctrl button[aria-pressed="false"]{background:#E5484D}
+.cam .ctrl svg{width:20px;height:20px}
+.meter{display:flex;gap:3px;align-items:flex-end;height:18px}
+.meter i{width:4px;border-radius:2px;background:var(--sage-ink);animation:lv 1s ease-in-out infinite}
+.meter i:nth-child(2){animation-delay:.15s}.meter i:nth-child(3){animation-delay:.3s}.meter i:nth-child(4){animation-delay:.45s}
+@keyframes lv{0%,100%{height:4px}50%{height:18px}}
+@media (prefers-reduced-motion:reduce){.meter i{animation:none;height:10px}}
+.panel{display:grid;gap:18px}
+.panel h1{font-size:clamp(1.9rem,3.6vw,2.5rem)}
+.panel .lead{color:var(--muted)}
+.checks{display:grid;gap:8px}
+.checks>div{display:flex;justify-content:space-between;align-items:center;gap:12px;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:12px 14px}
+.checks b{display:block;font-size:.95rem}
+.checks span{font-size:.85rem;color:var(--muted)}
+.checks .pill{flex:none}
+.with{display:flex;gap:12px;align-items:center;background:var(--tint);border-radius:16px;padding:12px 14px}
+.with img{width:44px;height:44px;border-radius:50%;object-fit:cover}
+.with b{display:block}
+.with span{font-size:.88rem;color:var(--muted)}
+
+/* En la llamada */
+.call{position:fixed;inset:0;z-index:60;background:#140C12;display:none}
+.call.on{display:block}
+.call>img{width:100%;height:100%;object-fit:cover;opacity:.95}
+.call .self{position:absolute;right:max(20px,env(safe-area-inset-right,0px));bottom:110px;width:min(240px,32vw);aspect-ratio:4/3;border-radius:16px;overflow:hidden;border:3px solid #fff;box-shadow:0 10px 30px rgba(0,0,0,.4)}
+.call .self img{width:100%;height:100%;object-fit:cover;transform:scaleX(-1)}
+.call .top{position:absolute;top:calc(20px + env(safe-area-inset-top,0px));left:max(20px,env(safe-area-inset-left,0px));right:max(20px,env(safe-area-inset-right,0px));display:flex;justify-content:space-between;align-items:center;gap:10px}
+.call .tag{background:rgba(20,12,18,.6);color:#fff;border-radius:999px;padding:8px 14px;font-weight:700;font-size:.9rem;display:flex;gap:8px;align-items:center;font-variant-numeric:tabular-nums}
+.call .tag i{width:9px;height:9px;border-radius:50%;background:#FF6B3B}
+.call .bar{position:absolute;left:50%;bottom:calc(28px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);display:flex;gap:12px;background:rgba(20,12,18,.6);padding:10px;border-radius:999px;backdrop-filter:blur(8px)}
+.call .bar button,.call .bar a{width:52px;height:52px;border-radius:50%;border:0;background:rgba(255,255,255,.16);color:#fff;display:grid;place-items:center;cursor:pointer}
+.call .bar .end{background:#E5484D;width:auto;padding:0 20px;border-radius:999px;font:700 .95rem var(--body);text-decoration:none;display:flex;gap:8px}
+.call .bar svg{width:22px;height:22px}
+@media (max-width:900px){.room{grid-template-columns:minmax(0,1fr)}}
+</style>
+
+<header class="top">
+  <div class="wrap">
+    <a href="v1.html" aria-label="Terapeasy, inicio"><span class="logo"></span></a>
+    <nav aria-label="Principal">
+      <a href="terapeutas.html">Busca tu terapeuta</a>
+      <a href="v1.html#como-funciona">Cómo funciona</a>
+    </nav>
+    <div class="actions">
+      <a class="icon-btn" href="confirmar.html" aria-label="Carrito"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/><path d="M2 3h3l2.4 12.2a1 1 0 0 0 1 .8h9.7a1 1 0 0 0 1-.8L21 7H6"/></svg></a>
+      <a class="icon-btn" href="cuenta-mensajes.html" aria-label="Mensajes, 2 sin leer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 0 1-11.6 7.1L4 20l1-4.6A8 8 0 1 1 21 12z"/></svg><span class="dot">2</span></a>
+      <a class="icon-btn" href="cuenta-avisos.html" aria-label="Avisos, 1 nuevo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 1 1 12 0c0 7 3 8 3 8H3s3-1 3-8"/><path d="M10 20a2 2 0 0 0 4 0"/></svg><span class="dot">1</span></a>
+      <a class="me" href="cuenta-sesiones.html"><img src="img/p-valentina.jpg" alt=""><span>Valentina</span></a>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="room">
+    <div class="cam" id="cam">
+      <img src="img/p-valentina.jpg" alt="Vista previa de tu cámara">
+      <div class="off">Cámara apagada</div>
+      <span class="name">Tú</span>
+      <div class="ctrl">
+        <button type="button" id="b-mic" aria-pressed="true" aria-label="Micrófono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></button>
+        <button type="button" id="b-cam" aria-pressed="true" aria-label="Cámara"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="6" width="14" height="12" rx="2"/><path d="M16 10l6-3v10l-6-3"/></svg></button>
+      </div>
+    </div>
+    <div class="panel">
+      <div>
+        <p class="eyebrow">Sala de espera</p>
+        <h1 style="margin-top:8px">Todo listo para tu sesión</h1>
+        <p class="lead" style="margin-top:8px">Revisa que se vea y se escuche bien. Camila te va a recibir en unos minutos.</p>
+      </div>
+      <div class="with"><img src="img/t-camila.jpg" alt=""><div><b>Sesión de prueba con Camila Rojas</b><span>Hoy · 11:30 – 12:00</span></div></div>
+      <div class="checks">
+        <div><div><b>Cámara</b><span>Cámara FaceTime HD</span></div><span class="pill ok" id="s-cam">Funciona</span></div>
+        <div><div><b>Micrófono</b><span>Micrófono del computador</span></div><span style="display:flex;gap:10px;align-items:center"><span class="meter" id="meter" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span class="pill ok" id="s-mic">Funciona</span></span></div>
+        <div><div><b>Conexión</b><span>Estable para videollamada</span></div><span class="pill ok">Buena</span></div>
+      </div>
+      <button class="btn btn-primary btn-block" type="button" id="enter"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="6" width="14" height="12" rx="2"/><path d="M16 10l6-3v10l-6-3"/></svg> Entrar a la sesión</button>
+      <p class="hint muted" style="font-size:.85rem;text-align:center">No necesitas instalar nada: funciona en tu navegador.</p>
+    </div>
+  </div>
+</main>
+
+<div class="call" id="call" role="dialog" aria-label="Videollamada con Camila Rojas">
+  <img src="img/camila-video.jpg" alt="Camila Rojas en la videollamada">
+  <div class="top"><span class="tag"><i></i>Sesión de prueba · <span id="t">00:00</span></span><span class="tag">Camila Rojas</span></div>
+  <div class="self"><img src="img/p-valentina.jpg" alt="Tu cámara"></div>
+  <div class="bar">
+    <button type="button" aria-label="Micrófono"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></button>
+    <button type="button" aria-label="Cámara"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="6" width="14" height="12" rx="2"/><path d="M16 10l6-3v10l-6-3"/></svg></button>
+    <a class="end" href="cuenta-sesiones.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 14c5-5 13-5 18 0l-2.5 2.5-3-1.5v-2.5a10 10 0 0 0-5 0V15l-3 1.5z"/></svg>Terminar</a>
+  </div>
+</div>
+
+<footer class="site">
+  <div class="wrap">
+    <div class="fgrid">
+      <div class="about"><span class="logo"></span><p>Terapeutas de distintas especialidades, con agenda online y sesiones por videollamada.</p></div>
+      <div><h4>Pacientes</h4><ul><li><a href="v1.html#terapias">Terapias</a></li><li><a href="terapeutas.html">Buscar terapeuta</a></li><li><a href="v1.html#como-funciona">Cómo funciona</a></li><li><a href="v1.html#preguntas">Preguntas</a></li></ul></div>
+      <div><h4>Terapeutas</h4><ul><li><a href="para-terapeutas.html">Para terapeutas</a></li><li><a href="registro.html">Crear perfil</a></li><li><a href="ingresar.html">Iniciar sesión</a></li></ul></div>
+      <div><h4>Síguenos</h4><ul><li><a href="#">Instagram</a></li><li><a href="#">Facebook</a></li><li><a href="#">YouTube</a></li></ul></div>
+    </div>
+    <div class="legal"><span>© 2026 Terapeasy SpA</span><span><a href="terminos.html">Términos y condiciones</a> · <a href="privacidad.html">Privacidad</a></span></div>
+  </div>
+</footer>
+<script>
+const cam=document.getElementById("cam");
+document.getElementById("b-cam").addEventListener("click",e=>{const b=e.currentTarget;const on=b.getAttribute("aria-pressed")!=="true";b.setAttribute("aria-pressed",String(on));cam.classList.toggle("nocam",!on);const s=document.getElementById("s-cam");s.textContent=on?"Funciona":"Apagada";s.className="pill "+(on?"ok":"off")});
+document.getElementById("b-mic").addEventListener("click",e=>{const b=e.currentTarget;const on=b.getAttribute("aria-pressed")!=="true";b.setAttribute("aria-pressed",String(on));document.getElementById("meter").style.visibility=on?"":"hidden";const s=document.getElementById("s-mic");s.textContent=on?"Funciona":"Silenciado";s.className="pill "+(on?"ok":"off")});
+let sec=0,iv;
+document.getElementById("enter").addEventListener("click",()=>{document.getElementById("call").classList.add("on");iv=setInterval(()=>{sec++;document.getElementById("t").textContent=String(Math.floor(sec/60)).padStart(2,"0")+":"+String(sec%60).padStart(2,"0")},1000)});
+</script>
+
+<a class="proto" href="mapa.html">Prototipo · ver todas las pantallas</a>
+</body>
+</html>

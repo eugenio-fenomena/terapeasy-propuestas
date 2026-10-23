@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Para terapeutas · Terapeasy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;500;600;700&family=Lato:ital,wght@0,400;0,700;0,900;1,400&display=swap">
+<link rel="stylesheet" href="base.css">
+</head>
+<body>
+<style>
+/* Página para captar terapeutas: hero, beneficios, pasos, cómo se paga, requisitos, preguntas */
+.pt-hero{background:var(--tint)}
+.pt-hero .wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center;padding-block:48px 72px}
+.pt-hero h1{font-size:clamp(2.6rem,5.4vw,4.2rem)}
+.pt-hero h1 em{font-style:normal;color:var(--plum)}
+.pt-hero .lede{margin-top:18px;font-size:1.15rem;color:var(--muted);max-width:34em}
+.pt-hero .cta{margin-top:28px;display:flex;flex-wrap:wrap;gap:12px}
+.pt-pic{position:relative;border-radius:26px;overflow:hidden;aspect-ratio:4/3.3;max-width:100%}
+.pt-pic img{width:100%;height:100%;object-fit:cover}
+.pt-pic .note{position:absolute;left:16px;bottom:16px;background:var(--surface);border-radius:14px;padding:12px 14px;box-shadow:var(--shadow);display:flex;gap:10px;align-items:center;font-size:.9rem}
+.pt-pic .note i{width:34px;height:34px;border-radius:50%;background:var(--sage-soft);color:var(--sage-ink);display:grid;place-items:center;flex:none}
+.pt-pic .note i svg{width:18px;height:18px}
+.pt-pic .note b{display:block}
+.sec{padding-block:88px}
+.sec .head{display:grid;gap:12px;max-width:640px;margin-bottom:40px}
+.sec .head h2{font-size:clamp(2rem,3.6vw,2.8rem)}
+.sec .head p{color:var(--muted);font-size:1.08rem}
+.ben{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.ben div{background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:22px;display:grid;gap:8px;align-content:start}
+.ben i{width:42px;height:42px;border-radius:12px;background:var(--plum-soft);color:var(--plum-strong);display:grid;place-items:center}
+.ben i svg{width:22px;height:22px}
+.ben b{font:600 1.15rem var(--display)}
+.ben span{color:var(--muted);font-size:.95rem}
+.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:32px}
+.steps div{display:grid;gap:10px;padding-top:20px;border-top:2px solid var(--line)}
+.steps .n{font:600 3rem/1 var(--display);color:var(--plum)}
+.steps h3{font-size:1.3rem}
+.steps p{color:var(--muted)}
+.money{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
+.calc{background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:24px;display:grid;gap:12px;box-shadow:var(--shadow)}
+.calc .row{display:flex;justify-content:space-between;gap:12px;font-size:1rem}
+.calc .row span{color:var(--muted)}
+.calc .row b{font-variant-numeric:tabular-nums}
+.calc .tot{border-top:1px solid var(--line);padding-top:12px}
+.calc .tot b{font:600 1.8rem var(--display);color:var(--sage-ink)}
+.calc .field{margin-bottom:4px}
+.calc small{font-size:.8rem;color:var(--muted)}
+.req{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.req li{display:flex;gap:12px;align-items:flex-start}
+.req li svg{width:22px;height:22px;color:var(--sage-ink);flex:none;margin-top:2px}
+.req b{display:block}
+.req span{color:var(--muted);font-size:.95rem}
+.band{background:var(--band);color:var(--on-band)}
+.band .wrap{padding-block:72px;display:grid;justify-items:center;text-align:center;gap:16px}
+.band h2{font-size:clamp(2rem,4vw,3rem);color:var(--on-band)}
+.band p{color:var(--on-band-muted);max-width:44ch}
+.band .btn{background:var(--sage);color:#1E3A24}
+.faq-wrap{display:grid;grid-template-columns:.8fr 1.2fr;gap:56px}
+@media (max-width:1000px){.pt-hero .wrap,.money,.faq-wrap{grid-template-columns:minmax(0,1fr)}.ben{grid-template-columns:1fr 1fr}}
+@media (max-width:640px){.ben,.steps{grid-template-columns:1fr}.sec{padding-block:64px}}
+</style>
+
+<header class="top">
+  <div class="wrap">
+    <a href="v1.html" aria-label="Terapeasy, inicio"><span class="logo"></span></a>
+    <nav aria-label="Principal">
+      <a href="terapeutas.html">Busca tu terapeuta</a>
+      <a href="v1.html#terapias">Terapias</a>
+      <a href="v1.html#como-funciona">Cómo funciona</a>
+      <a href="para-terapeutas.html" aria-current="page">Para terapeutas</a>
+    </nav>
+    <div class="actions">
+      <a class="login" href="ingresar.html">Iniciar sesión</a>
+      <a class="btn btn-primary" href="registro.html">Crear cuenta</a>
+    </div>
+  </div>
+</header>
+
+<main>
+<section class="pt-hero">
+  <div class="wrap">
+    <div>
+      <p class="eyebrow">Para terapeutas</p>
+      <h1 style="margin-top:12px">Lleva tu consulta a Terapeasy y <em>llega a más pacientes</em></h1>
+      <p class="lede">Crea tu perfil, define tus horarios y tus precios. Nosotros nos encargamos de la agenda, los cobros y la videollamada.</p>
+      <div class="cta"><a class="btn btn-primary" href="registro.html" id="go1">Crear mi perfil de terapeuta</a><a class="btn btn-ghost" href="terapeuta.html">Ver un perfil de ejemplo</a></div>
+    </div>
+    <div class="pt-pic">
+      <img src="img/camila-video.jpg" alt="Terapeuta atendiendo una sesión por videollamada">
+      <div class="note"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></i><div><b>Nueva reserva · Sesión de prueba</b><span class="muted">Jue 23 de octubre, 18:00</span></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec">
+  <div class="wrap">
+    <div class="head"><p class="eyebrow">Por qué Terapeasy</p><h2>Dedica tu tiempo a tus pacientes</h2><p>Todo lo administrativo de una consulta online, en un solo lugar.</p></div>
+    <div class="ben">
+      <div><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M16 3v4M8 3v4M3 10h18"/></svg></i><b>Agenda en línea</b><span>Tus pacientes ven tus horas libres y reservan solos, a cualquier hora.</span></div>
+      <div><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20M6 15h4"/></svg></i><b>Cobros al agendar</b><span>El paciente paga al reservar, así no pierdes horas por inasistencias.</span></div>
+      <div><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="6" width="14" height="12" rx="2"/><path d="M16 10l6-3v10l-6-3"/></svg></i><b>Videollamada integrada</b><span>Sin enviar links ni instalar nada: funciona en el navegador.</span></div>
+      <div><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg></i><b>Pacientes que te buscan</b><span>Apareces en las búsquedas de tus especialidades y en la página de cada terapia.</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" style="background:var(--tint)">
+  <div class="wrap">
+    <div class="head"><p class="eyebrow">Cómo funciona</p><h2>Empieza a atender en tres pasos</h2></div>
+    <div class="steps">
+      <div><span class="n">1</span><h3>Crea tu perfil</h3><p>Cuéntanos tu formación, tu enfoque y graba un video corto de presentación.</p></div>
+      <div><span class="n">2</span><h3>Define horarios y precios</h3><p>Elige cuándo atiendes, cuánto cobras y qué tipos de sesión ofreces.</p></div>
+      <div><span class="n">3</span><h3>Atiende y recibe tus pagos</h3><p>Conéctate a la sesión desde tu panel y sube la boleta de cada sesión.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" style="padding-top:0">
+  <div class="wrap faq-wrap">
+    <div class="head" style="margin-bottom:0"><p class="eyebrow">Requisitos</p><h2>Qué necesitas para empezar</h2></div>
+    <ul class="req">
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><div><b>Formación en tu especialidad</b><span>La mostramos en tu perfil para que los pacientes confíen.</span></div></li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><div><b>Emitir boletas</b><span>Subes la boleta de cada sesión desde tu panel; el paciente la recibe automáticamente.</span></div></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg><div><b>Computador o celular con cámara</b><span>Y una conexión estable para las videollamadas.</span></div></li>
+    </ul>
+  </div>
+</section>
+
+<section class="sec faq" style="background:var(--tint)">
+  <div class="wrap faq-wrap">
+    <div class="head" style="margin-bottom:0"><p class="eyebrow">Preguntas frecuentes</p><h2>Lo que nos preguntan los terapeutas</h2></div>
+    <div>
+      <details open><summary>¿Qué es la sesión de prueba?</summary><p>Es la primera sesión de cada paciente contigo: dura 30 minutos y tiene un precio reducido que tú defines. Ayuda a que más personas se animen a conocerte.</p></details>
+      <details><summary>¿Puedo bloquear días o tomar vacaciones?</summary><p>Sí. Desde tu panel puedes cambiar tus horarios o bloquear fechas cuando quieras.</p></details>
+    </div>
+  </div>
+</section>
+
+<section class="band">
+  <div class="wrap">
+    <h2>Súmate a la red de terapeutas de Terapeasy</h2>
+    <p>Crea tu perfil en minutos y empieza a recibir reservas.</p>
+    <a class="btn" href="registro.html" id="go2">Crear mi perfil de terapeuta</a>
+  </div>
+</section>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <div class="fgrid">
+      <div class="about"><span class="logo"></span><p>Terapeutas de distintas especialidades, con agenda online y sesiones por videollamada.</p></div>
+      <div><h4>Pacientes</h4><ul><li><a href="v1.html#terapias">Terapias</a></li><li><a href="terapeutas.html">Buscar terapeuta</a></li><li><a href="v1.html#como-funciona">Cómo funciona</a></li><li><a href="v1.html#preguntas">Preguntas</a></li></ul></div>
+      <div><h4>Terapeutas</h4><ul><li><a href="para-terapeutas.html">Para terapeutas</a></li><li><a href="registro.html">Crear perfil</a></li><li><a href="ingresar.html">Iniciar sesión</a></li></ul></div>
+      <div><h4>Síguenos</h4><ul><li><a href="#">Instagram</a></li><li><a href="#">Facebook</a></li><li><a href="#">YouTube</a></li></ul></div>
+    </div>
+    <div class="legal"><span>© 2026 Terapeasy SpA</span><span><a href="terminos.html">Términos y condiciones</a> · <a href="privacidad.html">Privacidad</a></span></div>
+  </div>
+</footer>
+<script>
+pp.addEventListener("input",()=>{const v=parseInt(pp.value.replace(/\D/g,""))||0;const c=Math.round(v*.15);document.getElementById("c1").textContent=f(v);document.getElementById("c2").textContent="−"+f(c);document.getElementById("c3").textContent=f(v-c)});
+document.querySelectorAll("#go1,#go2").forEach(a=>a.addEventListener("click",()=>{try{sessionStorage.setItem("te-rol","terapeuta")}catch(e){}}));
+</script>
+
+<a class="proto" href="mapa.html">Prototipo · ver todas las pantallas</a>
+</body>
+</html>

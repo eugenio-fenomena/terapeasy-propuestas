@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Crear nueva contraseña · Terapeasy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=League+Spartan:wght@400;500;600;700&family=Lato:ital,wght@0,400;0,700;0,900;1,400&display=swap">
+<link rel="stylesheet" href="base.css">
+</head>
+<body>
+<style>/* Ingreso y registro: formulario a la izquierda, foto con mensaje a la derecha */
+.auth{min-height:100vh;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+.auth .form-side{display:grid;grid-template-rows:auto 1fr auto;padding:28px max(24px,env(safe-area-inset-left,0px)) 28px max(24px,env(safe-area-inset-left,0px))}
+.auth .inner{width:100%;max-width:420px;margin:0 auto;align-self:center;display:grid;gap:22px;padding-block:40px}
+.auth h1{font-size:clamp(2.1rem,4vw,2.8rem)}
+.auth .sub{color:var(--muted);margin-top:8px}
+.auth form{display:grid;gap:16px}
+.pw{position:relative}
+.pw .input{padding-right:3.2em}
+.pw button{position:absolute;right:8px;top:50%;transform:translateY(-50%);border:0;background:transparent;color:var(--muted);cursor:pointer;padding:8px;border-radius:8px;font:700 .8rem var(--body)}
+.row-between{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.link{color:var(--plum);font-weight:700;text-decoration:none}
+.link:hover{text-decoration:underline}
+.or{display:flex;align-items:center;gap:12px;color:var(--muted);font-size:.85rem}
+.or::before,.or::after{content:"";flex:1;height:1px;background:var(--line)}
+.google{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;border:1.5px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;padding:.8em 1em;font:700 .95rem var(--body);cursor:pointer}
+.google:hover{border-color:var(--ink)}
+.google svg{width:18px;height:18px}
+.switch-line{text-align:center;color:var(--muted);font-size:.95rem}
+.okmsg{background:var(--sage-soft);color:var(--sage-ink);border-radius:12px;padding:12px 14px;font-size:.92rem;font-weight:700}
+.legal-mini{font-size:.82rem;color:var(--muted);text-align:center}
+
+.photo-side{position:sticky;top:0;height:100vh;align-self:start;overflow:hidden;background:#4F3B4B}
+.photo-side img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.photo-side::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(40,22,36,0) 35%,rgba(40,22,36,.82) 100%)}
+.photo-side .msg{position:absolute;left:44px;right:44px;bottom:44px;z-index:1;color:#fff;display:grid;gap:14px}
+.photo-side .msg h2{font-size:clamp(1.8rem,3vw,2.5rem);color:#fff}
+.photo-side .msg ul{list-style:none;margin:0;padding:0;display:grid;gap:8px;color:#F1E6EE}
+.photo-side .msg li{display:flex;gap:10px;align-items:flex-start}
+.photo-side .msg svg{width:20px;height:20px;flex:none;margin-top:2px;color:#A0D5A7}
+
+@media (max-width:900px){
+  .auth{grid-template-columns:1fr}
+  .photo-side{display:none}
+}
+
+.rules{list-style:none;margin:0;padding:0;display:grid;gap:6px;font-size:.88rem;color:var(--muted)}
+.rules li{display:flex;gap:8px;align-items:center}
+.rules li::before{content:"";width:14px;height:14px;border-radius:50%;border:2px solid var(--line);flex:none}
+.rules li.ok{color:var(--sage-ink);font-weight:700}
+.rules li.ok::before{background:var(--sage-ink);border-color:var(--sage-ink)}
+.err{font-size:.85rem;color:var(--coral-ink);font-weight:700}
+.sent{display:grid;gap:14px;justify-items:start}
+.sent .ic{width:56px;height:56px;border-radius:16px;background:var(--sage-soft);color:var(--sage-ink);display:grid;place-items:center}
+.sent .ic svg{width:28px;height:28px}
+</style>
+
+<main class="auth">
+  <div class="form-side">
+    <a href="index.html" aria-label="Terapeasy, inicio"><span class="logo"></span></a>
+    <div class="inner">
+      <section id="ask">
+        <div>
+          <h1>Crea una nueva contraseña</h1>
+          <p class="sub">Para la cuenta <b style="color:var(--ink)">valentina@ejemplo.cl</b>.</p>
+        </div>
+        <form id="f" style="margin-top:22px">
+          <div class="field"><label for="p1">Nueva contraseña</label><div class="pw"><input class="input" id="p1" type="password" autocomplete="new-password" required><button type="button" class="show" data-for="p1" aria-label="Mostrar contraseña">Mostrar</button></div></div>
+          <ul class="rules" id="rules"><li data-r="len">Al menos 8 caracteres</li></ul>
+          <div class="field"><label for="p2">Repite la contraseña</label><div class="pw"><input class="input" id="p2" type="password" autocomplete="new-password" required><button type="button" class="show" data-for="p2" aria-label="Mostrar contraseña">Mostrar</button></div></div>
+          <p class="err" id="err" hidden>Las contraseñas no coinciden.</p>
+          <button class="btn btn-primary btn-block" type="submit">Guardar contraseña</button>
+        </form>
+      </section>
+
+      <section id="done" class="sent" hidden>
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span>
+        <h1>Contraseña actualizada</h1>
+        <p class="sub" style="margin-top:0">Ya puedes entrar con tu nueva contraseña.</p>
+        <a class="btn btn-primary" href="ingresar.html">Iniciar sesión</a>
+      </section>
+    </div>
+    <p class="legal-mini">© 2026 Terapeasy SpA · <a class="link" href="terminos.html">Términos</a> · <a class="link" href="privacidad.html">Privacidad</a></p>
+  </div>
+  <div class="photo-side">
+    <img src="img/sesion-online.jpg" alt="">
+    <div class="msg">
+      <h2>Tu bienestar, a un clic de distancia</h2>
+      <ul>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Sesiones por videollamada, desde donde estés.</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg>Agenda, mensajes y pagos en un solo lugar.</li>
+      </ul>
+    </div>
+  </div>
+</main>
+
+<script>
+const p1=document.getElementById("p1"),p2=document.getElementById("p2");
+p1.addEventListener("input",()=>{document.querySelector('[data-r="len"]').classList.toggle("ok",p1.value.length>=8)});
+document.querySelectorAll(".show").forEach(b=>b.addEventListener("click",()=>{const i=document.getElementById(b.dataset.for);const v=i.type==="password";i.type=v?"text":"password";b.textContent=v?"Ocultar":"Mostrar"}));
+document.getElementById("f").addEventListener("submit",e=>{e.preventDefault();const ok=p1.value.length>=8;const same=p1.value===p2.value;const err=document.getElementById("err");err.textContent=!ok?"La contraseña debe tener al menos 8 caracteres.":"Las contraseñas no coinciden.";err.hidden=ok&&same;if(ok&&same){document.getElementById("ask").hidden=true;document.getElementById("done").hidden=false}});
+</script>
+
+<a class="proto" href="mapa.html">Prototipo · ver todas las pantallas</a>
+</body>
+</html>
