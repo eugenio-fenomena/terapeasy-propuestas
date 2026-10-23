@@ -128,8 +128,8 @@
       </header>
 
       <div class="p-facts">
-        <div><small>Sesión regular</small><b>60 min · $38.000</b></div>
-        <div><small>Sesión de prueba</small><b>30 min · $15.000</b></div>
+        <div><small>Sesión regular</small><b>60 min · $40.850</b></div>
+        <div><small>Sesión de prueba</small><b>30 min · $16.125</b></div>
         <div><small>Modalidad</small><b>Videollamada</b></div>
       </div>
 
@@ -184,13 +184,13 @@
     <aside class="book" id="agenda" aria-label="Agendar con Camila Rojas">
       <h2>Agenda con Camila</h2>
       <div class="seg" role="group" aria-label="Tipo de sesión">
-        <button type="button" data-kind="prueba" aria-pressed="true"><small>Primera vez</small><b>$15.000</b><span>Prueba · 30 min</span></button>
-        <button type="button" data-kind="regular" aria-pressed="false"><small>Regular</small><b>$38.000</b><span>Sesión · 60 min</span></button>
+        <button type="button" data-kind="prueba" aria-pressed="true"><small>Primera vez</small><b>$16.125</b><span>Prueba · 30 min</span></button>
+        <button type="button" data-kind="regular" aria-pressed="false"><small>Regular</small><b>$40.850</b><span>Sesión · 60 min</span></button>
       </div>
       <div class="week"><button type="button" aria-label="Semana anterior" disabled><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 6l-6 6 6 6"/></svg></button><span>19 – 23 de octubre</span><button type="button" aria-label="Semana siguiente"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></button></div>
       <div class="days" id="days"></div>
       <div class="slots" id="slots"></div>
-      <div class="summary"><span id="sum-when">Mié 21 · 11:30</span><b id="sum-what">30 min · $15.000</b></div>
+      <div class="summary"><span id="sum-when">Mié 21 · 11:30</span><b id="sum-what">30 min · $16.125</b></div>
       <a class="btn btn-primary btn-block" href="ingresar.html" id="go">Continuar</a>
       <a class="btn btn-ghost btn-block" href="ingresar.html">Enviar mensaje</a>
       <p class="note">Te pediremos iniciar sesión para confirmar y pagar.</p>
@@ -198,7 +198,7 @@
   </div>
 </main>
 
-<div class="mbar"><div><small>Sesión de prueba desde</small><b>$15.000</b></div><a class="btn btn-primary" href="#agenda">Agendar</a></div>
+<div class="mbar"><div><small>Sesión de prueba desde</small><b>$16.125</b></div><a class="btn btn-primary" href="#agenda">Agendar</a></div>
 
 <footer class="site">
   <div class="wrap">
@@ -214,7 +214,7 @@
 
 <script>
 const D=[{d:"Lun",n:19,s:[]},{d:"Mar",n:20,s:["15:00","17:30"]},{d:"Mié",n:21,s:["09:30","11:30","12:00","16:00","17:30","18:00"]},{d:"Jue",n:22,s:["10:00","11:00","19:00"]},{d:"Vie",n:23,s:["09:00","12:30","16:30","18:00"]}];
-const K={prueba:{t:"30 min",p:"$15.000"},regular:{t:"60 min",p:"$38.000"}};
+const K={prueba:{t:"30 min",p:"$16.125"},regular:{t:"60 min",p:"$40.850"}};
 let di=2,slot="11:30",kind="prueba";
 const days=document.getElementById("days"),slots=document.getElementById("slots");
 function render(){

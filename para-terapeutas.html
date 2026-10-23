@@ -91,7 +91,7 @@
     </div>
     <div class="pt-pic">
       <img src="img/camila-video.jpg" alt="Terapeuta atendiendo una sesión por videollamada">
-      <div class="note"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></i><div><b>Nueva reserva · Sesión de prueba</b><span class="muted">Jue 23 de octubre, 18:00</span></div></div>
+      <div class="note"><i><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></i><div><b>Nueva reserva · Sesión de prueba</b><span class="muted">Vie 23 de octubre, 18:00</span></div></div>
     </div>
   </div>
 </section>
@@ -161,7 +161,6 @@
   </div>
 </footer>
 <script>
-pp.addEventListener("input",()=>{const v=parseInt(pp.value.replace(/\D/g,""))||0;const c=Math.round(v*.15);document.getElementById("c1").textContent=f(v);document.getElementById("c2").textContent="−"+f(c);document.getElementById("c3").textContent=f(v-c)});
 document.querySelectorAll("#go1,#go2").forEach(a=>a.addEventListener("click",()=>{try{sessionStorage.setItem("te-rol","terapeuta")}catch(e){}}));
 </script>
 

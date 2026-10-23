@@ -98,7 +98,7 @@
       <p class="lead">Vacaciones, trámites o días libres. En esas fechas no se puede agendar.</p>
       <ul class="blocks" id="blocks">
         <li><div><b>Vacaciones</b><span>20 dic – 5 ene</span></div><button type="button">Quitar</button></li>
-        <li><div><b>Trámite</b><span>Vie 31 oct · 09:00 – 13:00</span></div><button type="button">Quitar</button></li>
+        <li><div><b>Trámite</b><span>Vie 30 oct · 09:00 – 13:00</span></div><button type="button">Quitar</button></li>
       </ul>
       <form class="newb" id="newb">
         <div class="field"><label for="b1">Desde</label><input class="input" id="b1" type="date" required></div>
@@ -111,15 +111,15 @@
 
   <section class="card">
     <h2>Tipos de sesión y precios</h2>
-    <p class="lead">Lo que pagan tus pacientes y lo que recibes tú después de la comisión de Terapeasy.</p>
-    <div class="typehead"><span>Sesión</span><span>Duración</span><span>Precio paciente</span><span>Terapias</span><span>Tú recibes</span></div>
+    <p class="lead">Defines tu precio. Te mostramos lo que paga el paciente y lo que recibes tú.</p>
+    <div class="typehead"><span>Sesión</span><span>Duración</span><span>Tu precio</span><span>Terapias</span><span>Tú recibes</span></div>
     <div class="types">
-      <div class="type fixed"><div><b>Sesión de prueba</b><small>Duración fija de la plataforma</small></div><span><b>30 min</b></span><div class="money"><label class="sr" for="p0">Precio sesión de prueba</label><input class="input" id="p0" inputmode="numeric" value="15.000" data-p></div><div class="tags"><span class="tag">Todas</span></div><div class="net">Tú recibes<br><b data-n>$12.750</b></div></div>
-      <div class="type"><div><b>Reiki</b><small>Sesión regular</small></div><select class="select" aria-label="Duración Reiki"><option>30 min</option><option selected>60 min</option><option>90 min</option><option>120 min</option></select><div class="money"><label class="sr" for="p1">Precio Reiki</label><input class="input" id="p1" inputmode="numeric" value="38.000" data-p></div><div class="tags"><span class="tag">Reiki</span></div><div class="net">Tú recibes<br><b data-n>$32.300</b></div></div>
-      <div class="type"><div><b>Terapia Floral</b><small>Incluye fórmula personalizada</small></div><select class="select" aria-label="Duración Terapia Floral"><option>30 min</option><option selected>60 min</option><option>90 min</option></select><div class="money"><label class="sr" for="p2">Precio Terapia Floral</label><input class="input" id="p2" inputmode="numeric" value="35.000" data-p></div><div class="tags"><span class="tag">Terapia Floral</span></div><div class="net">Tú recibes<br><b data-n>$29.750</b></div></div>
+      <div class="type fixed"><div><b>Sesión de prueba</b><small>Duración fija de la plataforma</small></div><span><b>30 min</b></span><div class="money"><label class="sr" for="p0">Tu precio sesión de prueba</label><input class="input" id="p0" inputmode="numeric" value="15.000" data-p></div><div class="tags"><span class="tag">Todas</span></div><div class="net">Paga el paciente <span data-t>$16.125</span><br>Tú recibes <b data-n>$13.875</b></div></div>
+      <div class="type"><div><b>Reiki</b><small>Sesión regular</small></div><select class="select" aria-label="Duración Reiki"><option>30 min</option><option selected>60 min</option><option>90 min</option><option>120 min</option></select><div class="money"><label class="sr" for="p1">Precio Reiki</label><input class="input" id="p1" inputmode="numeric" value="38.000" data-p></div><div class="tags"><span class="tag">Reiki</span></div><div class="net">Paga el paciente <span data-t>$40.850</span><br>Tú recibes <b data-n>$35.150</b></div></div>
+      <div class="type"><div><b>Terapia Floral</b><small>Incluye fórmula personalizada</small></div><select class="select" aria-label="Duración Terapia Floral"><option>30 min</option><option selected>60 min</option><option>90 min</option></select><div class="money"><label class="sr" for="p2">Precio Terapia Floral</label><input class="input" id="p2" inputmode="numeric" value="35.000" data-p></div><div class="tags"><span class="tag">Terapia Floral</span></div><div class="net">Paga el paciente <span data-t>$37.625</span><br>Tú recibes <b data-n>$32.375</b></div></div>
     </div>
     <div class="save" style="justify-content:space-between"><button class="add" type="button">+ Agregar tipo de sesión</button><span style="display:flex;gap:10px;align-items:center"><span class="saved" hidden>Precios guardados</span><button class="btn btn-primary" type="button" data-save>Guardar precios</button></span></div>
-    <p class="muted" style="font-size:.82rem">Comisión de ejemplo (15%) para el prototipo: el cálculo real lo hace el sistema.</p>
+    <p class="muted" style="font-size:.82rem">Terapeasy descuenta 7,5% de tu precio. Al paciente se le suma un cargo por servicio de 7,5%. Ambos incluyen IVA.</p>
   </section>
 </div>
 </main>
@@ -147,7 +147,7 @@ draw();
 document.querySelectorAll("[data-save]").forEach(b=>b.addEventListener("click",()=>{const s=b.parentElement.querySelector(".saved");s.hidden=false;setTimeout(()=>s.hidden=true,2500)}));
 document.getElementById("blocks").addEventListener("click",e=>{if(e.target.tagName==="BUTTON")e.target.closest("li").remove()});
 document.getElementById("newb").addEventListener("submit",e=>{e.preventDefault();const f=v=>new Date(v+"T12:00").toLocaleDateString("es-CL",{day:"numeric",month:"short"});const li=document.createElement("li");li.innerHTML=`<div><b>${document.getElementById("b3").value.replace(/</g,"&lt;")||"Bloqueo"}</b><span>${f(b1.value)} – ${f(b2.value)}</span></div><button type="button">Quitar</button>`;document.getElementById("blocks").appendChild(li);e.target.reset()});
-document.querySelectorAll("[data-p]").forEach(inp=>inp.addEventListener("input",()=>{const v=parseInt(inp.value.replace(/\D/g,""))||0;inp.closest(".type").querySelector("[data-n]").textContent="$"+Math.round(v*.85).toLocaleString("es-CL")}));
+document.querySelectorAll("[data-p]").forEach(inp=>inp.addEventListener("input",()=>{const v=parseInt(inp.value.replace(/\D/g,""))||0,f=Math.round(v*.075*100)/100,c=x=>"$"+Math.round(x).toLocaleString("es-CL"),t=inp.closest(".type");t.querySelector("[data-n]").textContent=c(v-f);t.querySelector("[data-t]").textContent=c(v*1.075)}));
 </script>
 
 <a class="proto" href="mapa.html">Prototipo · ver todas las pantallas</a>

@@ -186,6 +186,7 @@ const T=[
 ];
 const FILTERS=["Todas","Psicoterapia","Reiki","Terapia Floral","Constelaciones","Coaching","Terapia de pareja","Astrología","Tarot","Hipnosis","Meditación Terapéutica","Terapia Ayurvédica","Musicoterapia"];
 let ff="Todas";
+const tot=b=>Math.round(b*1.075);/* precio que paga el paciente: base + 7,5% de cargo por servicio, IVA incluido */
 const clp=v=>"$"+v.toLocaleString("es-CL");
 const ver='<svg class="verified" viewBox="0 0 24 24" fill="currentColor" role="img" aria-label="Perfil verificado"><path d="M12 2l2.4 1.8 3-.2.9 2.9 2.5 1.7-1 2.8 1 2.8-2.5 1.7-.9 2.9-3-.2L12 22l-2.4-1.8-3 .2-.9-2.9-2.5-1.7 1-2.8-1-2.8 2.5-1.7.9-2.9 3 .2z"/><path d="M8.5 12.2l2.3 2.3 4.7-4.8" stroke="#fff" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>';
 const chips=document.getElementById("tchips");
@@ -196,7 +197,7 @@ function draw(list){
   cards.innerHTML=list.length?list.map(t=>`<article class="card">
     <img class="ph" src="img/t-${t.s}.jpg" alt="">
     <div class="info"><h3><a href="terapeuta.html">${t.n}</a>${ver}</h3><p class="role">${t.r}</p><p class="bio">${t.bio}</p><div class="tags">${t.tags.map(x=>`<span class="tag">${x}</span>`).join("")}</div></div>
-    <div class="side"><div class="price"><b>${clp(t.p)}</b><small>60 min</small></div><span class="trialp">Prueba de 30 min: ${clp(t.t)}</span>
+    <div class="side"><div class="price"><b>${clp(tot(t.p))}</b><small>60 min</small></div><span class="trialp">Prueba de 30 min: ${clp(tot(t.t))}</span>
     <div class="next"><small>Próximas horas</small><div>${t.next.map(h=>`<a href="terapeuta.html#agenda">${h}</a>`).join("")}</div></div>
     <a class="btn btn-primary" href="terapeuta.html">Ver perfil y agendar</a></div></article>`).join(""):`<p class="empty-l">No hay terapeutas que coincidan. Prueba con otra terapia o quita la búsqueda.</p>`;
   document.getElementById("count").textContent=list.length+(list.length===1?" terapeuta":" terapeutas");

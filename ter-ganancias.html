@@ -78,7 +78,7 @@ th:last-child,td:last-child{width:1%;white-space:nowrap}
 
 <div class="wrap pbody">
   <div class="kpis">
-    <div class="kpi hl"><small>Próximo pago</small><b>$412.250</b><span>Se deposita el viernes 31 de octubre</span></div>
+    <div class="kpi hl"><small>Próximo pago</small><b>$166.550</b><span>Se transfiere el viernes 30 de octubre</span></div>
     <div class="kpi"><small>Ganado en 30 días</small><b>$986.500</b><span><span class="up">+12%</span> vs. mes anterior</span></div>
     <div class="kpi"><small>Sesiones en 30 días</small><b>38</b><span>7 de ellas de prueba</span></div>
     <div class="kpi"><small>Pacientes que volvieron</small><b>5 de 7</b><span>Tras su sesión de prueba</span></div>
@@ -89,16 +89,16 @@ th:last-child,td:last-child{width:1%;white-space:nowrap}
       <h2>Pagos</h2>
       <div class="tbl">
         <table>
-          <thead><tr><th>Período</th><th>Sesiones</th><th class="r">Monto</th><th>Estado</th></tr></thead>
+          <thead><tr><th>Semana</th><th>Sesiones</th><th class="r">Monto</th><th>Estado</th></tr></thead>
           <tbody>
-            <tr><td>16 – 31 oct</td><td>17</td><td class="r">$412.250</td><td><span class="pill wait">Por pagar</span></td></tr>
-            <tr><td>1 – 15 oct</td><td>21</td><td class="r">$574.250</td><td><span class="pill ok">Pagado 16 oct</span></td></tr>
-            <tr><td>16 – 30 sep</td><td>18</td><td class="r">$489.600</td><td><span class="pill ok">Pagado 1 oct</span></td></tr>
-            <tr><td>1 – 15 sep</td><td>15</td><td class="r">$402.900</td><td><span class="pill ok">Pagado 16 sep</span></td></tr>
+            <tr><td>Corte jue 29 oct</td><td>5</td><td class="r">$166.550</td><td><span class="pill wait">Se paga vie 30 oct</span></td></tr>
+            <tr><td>Corte jue 22 oct</td><td>9</td><td class="r">$301.950</td><td><span class="pill ok">Pagado vie 23 oct</span></td></tr>
+            <tr><td>Corte jue 15 oct</td><td>8</td><td class="r">$268.400</td><td><span class="pill ok">Pagado vie 16 oct</span></td></tr>
+            <tr><td>Corte jue 8 oct</td><td>7</td><td class="r">$231.250</td><td><span class="pill ok">Pagado vie 9 oct</span></td></tr>
           </tbody>
         </table>
       </div>
-      <p class="how"><b>Cómo te pagamos:</b> sumamos lo que recibes por cada sesión realizada, ya descontada la comisión de Terapeasy, y lo depositamos cada 15 días.</p>
+      <p class="how"><b>Cómo te pagamos:</b> cada viernes transferimos lo que recibes por las sesiones cuya boleta fue aprobada hasta el jueves a las 23:59. Terapeasy descuenta 7,5% de tu precio, IVA incluido.</p>
     </section>
 
     <section class="card">
@@ -110,7 +110,7 @@ th:last-child,td:last-child{width:1%;white-space:nowrap}
         <div><span>Correo de aviso</span><b>camila@ejemplo.cl</b></div>
       </div>
       <button class="btn btn-ghost btn-block" type="button">Cambiar datos bancarios</button>
-      <div class="note-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v5h1"/></svg><span>Para recibir el pago tienes que haber subido la boleta de cada sesión del período.</span></div>
+      <div class="note-box"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8h.01M11 12h1v5h1"/></svg><span>Cada sesión entra en el pago cuando su boleta está aprobada. Si la subes después del jueves, pasa al viernes siguiente.</span></div>
     </section>
   </div>
 
@@ -124,12 +124,12 @@ th:last-child,td:last-child{width:1%;white-space:nowrap}
       </div>
     </div>
     <div class="out">
-      <div><small>Comisión Terapeasy (15%)</small><b id="so1">$5.700</b></div>
-      <div><small>Tú recibes por sesión</small><b id="so2">$32.300</b></div>
-      <div class="hl"><small>Al mes (aprox.)</small><b id="so3">$1.399.667</b></div>
+      <div><small>Paga el paciente</small><b id="so1">$40.850</b></div>
+      <div><small>Tú recibes (−7,5%)</small><b id="so2">$35.150</b></div>
+      <div class="hl"><small>Al mes (aprox.)</small><b id="so3">$1.523.167</b></div>
     </div>
   </section>
-  <p class="muted" style="font-size:.82rem;margin-top:16px">Montos, frecuencia de pago y comisión son de ejemplo: hay que confirmarlos con el modelo real.</p>
+  <p class="muted" style="font-size:.82rem;margin-top:16px">Montos de ejemplo. Comisión y pagos según el modelo vigente de Terapeasy.</p>
 </div>
 </main>
 
@@ -146,7 +146,7 @@ th:last-child,td:last-child{width:1%;white-space:nowrap}
 </footer>
 <script>
 const sp=document.getElementById("sp"),sn=document.getElementById("sn"),clp=v=>"$"+Math.round(v).toLocaleString("es-CL");
-function sim(){const v=parseInt(sp.value.replace(/\D/g,""))||0,n=Math.max(0,parseInt(sn.value)||0),c=v*.15;document.getElementById("so1").textContent=clp(c);document.getElementById("so2").textContent=clp(v-c);document.getElementById("so3").textContent=clp((v-c)*n*52/12)}
+function sim(){const v=parseInt(sp.value.replace(/\D/g,""))||0,n=Math.max(0,parseInt(sn.value)||0),f=Math.round(v*.075*100)/100;document.getElementById("so1").textContent=clp(v*1.075);document.getElementById("so2").textContent=clp(v-f);document.getElementById("so3").textContent=clp((v-f)*n*52/12)}
 sp.addEventListener("input",sim);sn.addEventListener("input",sim);sim();
 </script>
 

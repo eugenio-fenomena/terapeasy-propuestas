@@ -104,10 +104,10 @@ textarea.input{min-height:100px;resize:vertical;font:inherit}
       <h2>Resumen</h2>
       <span class="pill wait trialtag" id="tag">Primera sesión con Camila</span>
       <div class="line"><span id="l-kind">Sesión de prueba · 30 min</span><b id="l-price">$15.000</b></div>
-      <div class="line"><span>Cargo por servicio</span><b>$0</b></div>
-      <div class="total"><span>Total</span><b id="total">$15.000</b></div>
+      <div class="line"><span>Cargo por servicio</span><b id="l-fee">$1.125</b></div>
+      <div class="total"><span>Total</span><b id="total">$16.125</b></div>
       <label class="check" for="pol"><input type="checkbox" id="pol" checked><span>Entiendo que puedo cancelar hasta 24 horas antes con devolución total.</span></label>
-      <a class="btn btn-primary btn-block" href="agendada.html" id="pay">Pagar $15.000</a>
+      <a class="btn btn-primary btn-block" href="agendada.html" id="pay">Pagar $16.125</a>
       <p class="safe"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>Pago seguro. No guardamos tu tarjeta.</p>
     </aside>
   </div>
@@ -127,11 +127,11 @@ textarea.input{min-height:100px;resize:vertical;font:inherit}
 <script>
 let sel=null;try{sel=JSON.parse(sessionStorage.getItem("te-reserva")||"null")}catch(e){}
 if(sel){
-  const k=sel.kind==="regular"?{t:"Sesión regular · 60 min",p:"$38.000"}:{t:"Sesión de prueba · 30 min",p:"$15.000"};
+  const k=sel.kind==="regular"?{t:"Sesión regular · 60 min",p:"$38.000",f:"$2.850",tt:"$40.850"}:{t:"Sesión de prueba · 30 min",p:"$15.000",f:"$1.125",tt:"$16.125"};
   document.getElementById("kind").textContent=k.t+" · Videollamada";
   document.getElementById("when").textContent=sel.when;
-  document.getElementById("l-kind").textContent=k.t;document.getElementById("l-price").textContent=k.p;document.getElementById("total").textContent=k.p;
-  document.getElementById("pay").textContent="Pagar "+k.p;
+  document.getElementById("l-kind").textContent=k.t;document.getElementById("l-price").textContent=k.p;document.getElementById("l-fee").textContent=k.f;document.getElementById("total").textContent=k.tt;
+  document.getElementById("pay").textContent="Pagar "+k.tt;
   if(sel.kind==="regular")document.getElementById("tag").hidden=true;
 }
 const pol=document.getElementById("pol"),pay=document.getElementById("pay");
